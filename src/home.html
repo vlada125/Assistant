@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HA Website</title>
+    <link rel="stylesheet" href="dist/output.css" />
+    <style>
+        /* Frame */ 
+        .frame {
+          line-height: 250px;
+          overflow: hidden;
+        }
+        .frame ul.main-news__items-wrapp {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          position: relative;
+        }
+        .frame ul.main-news__items-wrapp li {
+          float: left;
+          width: 610px;
+          min-width: 610px;
+          height: 100%;
+        }
+        .frame ul.main-news__items-wrapp li.active img {
+            width: 100%;
+            padding-top: 0px;
+        }
+
+        .scroll-images {
+            width: 80%;
+            margin: auto;
+            padding-top: 30px;
+        }
+        
+        /* Scrollbar */
+        .scrollbar {
+          height: 3px;
+          background: #CDDDFB;
+          line-height: 0;
+        }
+        .scrollbar .handle {
+          width: 100px;
+          height: 100%;
+          background: #377CFD;
+          cursor: pointer;
+        }
+        .scrollbar .handle .mousearea {
+          position: absolute;
+          top: -9px;
+          left: 0;
+          width: 90px;
+          height: 20px;
+        }
+        
+        /* Pages */
+        /* Controls */
+        .controls {
+          margin: 25px 0;
+          text-align: center;
+        }
+        
+        .news-slider__item {
+          position: relative;
+          background: #FFFFFF;
+          transition: all 0.3s;
+          width: 403px;
+          height: 440px;
+          margin-right: 40px;
+        }
+        @media only screen and (max-width: 1200px) {
+          .news-slider__item {
+            width: 314px;
+          }
+        }
+        .news-slider__item:last-child {
+          margin-right: 0;
+        }
+        .news-slider__item:hover .news-slider__head {
+          color: #377CFD;
+        }
+        .news-slider__item:hover {
+          cursor: pointer;
+          box-shadow: 0 4px 20px 0 rgba(88, 121, 163, 0.2);
+        }
+        .news-slider__item .news-slider__link {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 100%;
+          width: 100%;
+          display: block;
+        }
+        .news-slider__item .news-slider__media {
+          background-size: cover;
+          width: 100%;
+          height: 240px;
+          position: relative;
+          transition: all 0.5s;
+        }
+        .news-slider__item .news-slider__text-wrap {
+          padding: 30px 40px;
+        }
+        @media only screen and (max-width: 1024px) {
+          .news-slider__item .news-slider__text-wrap {
+            padding: 26px 20px;
+          }
+        }
+        .news-slider__item .news-slider__text-wrap .news-slider__title {
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: space-between;
+          align-items: flex-start;
+        }
+        .news-slider__item .news-slider__text-wrap .news-slider__title .news-slider__head {
+          margin: 0;
+          transition: all 0.3s;
+          width: 70%;
+          font-size: 18px;
+        }
+        @media only screen and (max-width: 1024px) {
+          .news-slider__item .news-slider__text-wrap .news-slider__title .news-slider__head {
+            font-size: 16px;
+            padding: 0 10px 0 0;
+          }
+        }
+        .news-slider__item .news-slider__text-wrap .news-slider__title .date {
+          opacity: 0.3;
+          color: #1D1D1D;
+          font-size: 13px;
+          line-height: 15px;
+          font-weight: 500;
+          width: 30%;
+          margin-top: 7px;
+          text-align: right;
+          white-space: nowrap;
+        }
+        .news-slider__item .news-slider__text-wrap .news-slider__title .date span:nth-child(2) {
+          margin: 0 3px;
+        }
+        @media only screen and (max-width: 1024px) {
+          .news-slider__item .news-slider__text-wrap .news-slider__text {
+            display: none;
+          }
+        }
+        
+        .news-slider__item--youtube:hover {
+          box-shadow: none;
+        }
+        .news-slider__item--youtube:hover .news-slider__head {
+          color: #000;
+        }
+        .news-slider__item--youtube .news-slider__youtube-link {
+          background-size: cover;
+          position: relative;
+          transition: all 0.5s;
+          font-size: 0;
+          color: transparent;
+          height: 240px;
+          width: 100%;
+          display: block;
+          z-index: 9;
+        }
+        .news-slider__item--youtube .news-slider__youtube-link:before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.4);
+          transition: all 0.5s;
+        }
+        .news-slider__item--youtube .news-slider__youtube-link:hover:before {
+          background-color: transparent;
+          transition: all 0.5s;
+        }
+        .news-slider__item--youtube .news-slider__text-wrap--youtube {
+          display: block;
+          text-decoration: none;
+        }
+        .news-slider__item--youtube .news-slider__text-wrap--youtube:hover .news-slider__head {
+          color: #377CFD;
+        }
+        .news-slider__item--youtube .news-slider__youtube-button {
+          position: absolute;
+          width: 0;
+          height: 0;
+          border: none;
+          border-top: 10px solid transparent;
+          border-bottom: 10px solid transparent;
+          border-left: 18px solid #fff;
+          background-color: transparent;
+          top: 30%;
+          left: 50%;
+          transform: translateX(-8px) translateY(-10px);
+          margin: 0;
+          padding: 0;
+          cursor: pointer;
+          transition: all 0.3s;
+          outline: none;
+          z-index: 10;
+        }
+        .news-slider__item--youtube .news-slider__youtube-button:hover {
+          border-left: 18px solid #2B62FC;
+        }
+    </style>
+    
+</head>
+<body>
+
+  <!-- header -->
+  <header class="relative bg-white">
+    <div class="container mx-auto">
+        <div class="flex justify-between items-center py-[15px] md:py-[61px] space-x-10">
+            <div class="flex justify-start lg:w-0 lg:flex-1">
+                <a href="home.html">
+                    <img src="images/page_logo.png" class="w-[32px] h-[32px]" alt="Page Logo">
+                </a>
+                <span class="md:flex hidden font-semibold text-xl pl-[11px]">Home Assistant</span>
+                <span class="md:flex hidden font-medium text-sm pt-[5px] pl-[5px]"> 22.09</span>
+                <p class="md:flex hidden px-1 m-2 bg-[#0267FF] rounded-sm text-[8px] h-3 font-semibold text-white">
+                    LS</p>
+            </div>
+            <img src="images/header_circle.png" class="absolute top-[-10px] hidden md:flex"/>
+            <img src="images/mobile_circle1.png" class="absolute top-0 right-0 flex md:hidden"/>
+            <div class="flex items-center">
+                <nav class="hidden md:flex ">
+                    <div class="px-3 xl:px-5">
+                        <a href="discover.html"
+                            class="text-black text-[18px] group rounded-md inline-flex items-center text-base font-semibold hover:text-gray-900"
+                            aria-expanded="false">
+                            <span>DISCOVER</span>
+                        </a>
+                    </div>
+                    <div class="px-3 xl:px-5">
+                        <a href="learn.html"
+                            class="text-black text-[18px] group rounded-md inline-flex items-center text-base font-semibold hover:text-gray-900"
+                            aria-expanded="false">
+                            <span>LEARN</span>
+                        </a>
+                    </div>
+                    <div class="px-3 xl:px-5">
+                        <a href="build.html"
+                            class="text-black text-[18px] group rounded-md inline-flex items-center text-base font-semibold hover:text-gray-900"
+                            aria-expanded="false">
+                            <span>BUILD</span>
+                        </a>
+                    </div>
+                    <div class="px-3 xl:px-5">
+                        <a href="story.html"
+                            class="text-black text-[18px] group rounded-md inline-flex items-center text-base font-semibold hover:text-gray-900"
+                            aria-expanded="false">
+                            <span>DEMOS</span>
+                        </a>
+                    </div>
+                    <div class="px-3 xl:px-5 ml-10">
+                        <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
+                        <a href="blog.html"
+                            class="text-black text-[18px] group rounded-md inline-flex items-center text-base font-semibold hover:text-gray-900"
+                            aria-expanded="false">
+                            <span>BLOG</span>
+                        </a>
+                    </div>
+                </nav>
+                <div class="ml-0 lg:ml-5">
+                    <div class="flex items-center">
+                        <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
+                        <div class="relative" id="search-box">
+                            <div class="flex items-center">
+                                <p
+                                class="text-black text-[18px] group rounded-md inline-flex items-center text-base font-semibold hover:text-gray-900 cursor-pointer search-open">
+                                <img width="19.19" src="images/search.png" />
+                            </p>
+                            </div>
+                            <div class="search-result absolute right-[-13px] z-30 w-[300px] md:w-[500px] hidden bg-white h-fit rounded-3xl p-4 shadow-xl shadow-gray-900">
+                                <div class="  shadow-md shadow-gray-600 absolute right-0 top-[-36px]   w-full bg-white p-3 rounded-full flex">
+                                    <input  class="w-[80%] pl-3 text-lg  font-semibold text-black focus:outline-none"  placeholder="alright">
+                                    <p
+                                    class="ml-auto float-right text-black text-[18px] group rounded-md inline-flex items-center text-base font-semibold hover:text-gray-900 ">
+                                    <img width="19.19" src="images/search.png" />
+                                    </p>
+                                   
+                                </div>
+                                <div class="">
+                                    <div class="bg-[#F8F8F8] rounded-sm p-3 mb-3">
+                                        <div class="flex justify-between font-semibold text-[16px]">
+                                            <p class="">Onboarding Home Assistant</p>
+                                            <p class="opacity-40">Getting Started</p>
+                                        </div>
+                                        <div class="bg-white rounded-sm p-1 mt-2">
+                                            <p class="text-[#41BDF5] text-[14px]">Alright<span class="text-black opacity-40">, you made it here. The tough part is done.</span></p>
+                                        </div>
+
+                                    </div>
+                                    <div class="bg-[#F8F8F8] rounded-sm p-3 mb-3">
+                                        <div class="flex justify-between font-semibold text-[16px]">
+                                            <p class="">Splitting up the configuration</p>
+                                            <p class="opacity-40">Docs / Configuration</p>
+                                        </div>
+                                        <div class="bg-white rounded-sm p-1 mt-2">
+                                            <p class="text-[#41BDF5] text-[14px]">Alright<span class="text-black opacity-40">, so we’ve got the single integrations and the include statements in the base ...</span></p>
+                                        </div>
+
+                                    </div>
+                                    <div class="bg-[#F8F8F8] rounded-sm p-3 mb-3">
+                                        <div class="flex justify-between font-semibold text-[16px]">
+                                            <p class="">Template Light</p>
+                                            <p class="opacity-40">Integration</p>
+                                        </div>
+                                        <div class="bg-white rounded-sm p-1 mt-2">
+                                            <p class="text-[#41BDF5] text-[14px]">Template Light<span class="text-black opacity-40"></span></p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                
+                        </div>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button type="button" onclick="menuopen()"
+                        class="relative rounded-md p-2 inline-flex items-center justify-center"
+                        aria-expanded="false">
+                        <span class="sr-only">Open menu</span>
+                        <svg width="18" height="12" viewBox="0 0 18 12" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0H18V2H0V0ZM0 5H18V7H0V5ZM0 10H18V12H0V10Z" fill="black" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+   
+
+    <div class="absolute top-0 inset-x-0 transition transform origin-top-right z-[100] hidden" id="mobile-menu">
+        <div class="shadow-lg ring-1 ring-black ring-opacity-5 bg-white"
+            style="background-image: url('images/menu_circle2.png');background-repeat:no-repeat;">
+            <div class="pt-[15px] pb-6 container mx-auto">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <a href="home.html">
+                                <img class="h-8 w-auto" src="images/page_logo.png" class="w-[32px] h-[32px]" alt="Workflow">
+                        </a>
+                    </div>
+                    <div class="mr-1">
+                        <button type="button" onclick="menuclose()"
+                            class="rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                            <span class="sr-only">Close menu</span>
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z"
+                                    fill="black" />
+                            </svg>
+
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-10">
+                    <nav class="grid gap-y-8 px-3">
+                        <a href="discover.html"
+                            class="-m-3 py-3 flex items-center hover:bg-gray-50 border-opacity-20"
+                            style="border-bottom: dotted;border-bottom-color: #41bdf533;">
+                            <span class="ml-3 text-[32px] leading-[38px] font-semibold text-blue-light"> Discover
+                            </span>
+                        </a>
+                        <a href="learn.html" class="-m-3 py-3 flex items-center hover:bg-gray-50 border-opacity-20"
+                            style="border-bottom: dotted;border-bottom-color: #41bdf533;">
+                            <span class="ml-3 text-[32px] leading-[38px] font-semibold text-blue-light"> Learn
+                            </span>
+                        </a>
+                        <a href="build.html" class="-m-3 py-3 flex items-center hover:bg-gray-50 border-opacity-20"
+                            style="border-bottom: dotted;border-bottom-color: #41bdf533;">
+                            <span class="ml-3 text-[32px] leading-[38px] font-semibold text-blue-light"> Build
+                            </span>
+                        </a>
+                        <a href="#" class="-m-3 py-3 flex items-center hover:bg-gray-50 border-opacity-20"
+                            style="border-bottom: dotted;border-bottom-color: #41bdf533;">
+                            <span class="ml-3 text-[32px] leading-[38px] font-semibold text-blue-light"> Explore
+                            </span>
+                        </a>
+                        <a href="story.html" class="-m-3 py-3 flex items-center hover:bg-gray-50 border-opacity-20"
+                            style="border-bottom: dotted;border-bottom-color: #41bdf533;">
+                            <span class="ml-3 text-[32px] leading-[38px] font-semibold text-blue-light"> Our Story
+                            </span>
+                        </a>
+                        <a href="blog.html" class="-m-3 py-3 flex items-center rounded-md hover:bg-gray-50">
+                            <span class="ml-3 text-[32px] leading-[38px] font-semibold text-blue-light"> Blog
+                            </span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="mt-12 md:grid grid-cols-2 gap-16 xl:mt-0 xl:col-span-2  p-[25px]">
+                <div class="grid grid-cols-2 md:gap-8">
+                    <div>
+                        <h3 class="font-semibold text-[14px] text-black opacity-[.66] leading-3">SUPPORT</h3>
+                        <ul role="list" class="mt-4 space-y-4">
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Learn </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Developer Docs </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Contact </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-[14px] text-black opacity-[.66] leading-3">SYSTEM</h3>
+                        <ul role="list" class="mt-4 space-y-4">
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Alerts </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Status </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Sercurity </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Data </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2">
+                    <div>
+                        <h3 class="font-semibold text-[14px] text-black opacity-[.66] leading-3">COMMUNITY</h3>
+                        <ul role="list" class="mt-4 space-y-4">
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Explore </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Discord </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Github </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Data </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-11">
+                        <h3 class="font-semibold text-[14px] text-black opacity-[.66] leading-3">ABOUT</h3>
+                        <ul role="list" class="mt-4 space-y-4">
+                            <li>
+                                <a href="discover.html" class="font-semibold text-xl text-black"> Discover </a>
+                            </li>
+
+                            <li>
+                                <a href="story.html" class="font-semibold text-xl text-black"> Our Story </a>
+                            </li>
+
+                            <li>
+                                <a href="blog.html" class="font-semibold text-xl text-black"> Blog </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="container mx-auto px-6 lg:py-16 lg:px-8 mt-[90px]">
+                <div class="xl:grid xl:grid-cols-3 xl:gap-8">
+                    <div class="space-y-4 md:space-y-8 xl:col-span-1">
+                        <img class="hidden md:block" height="72" width="72" src="images/footer-logo.png"
+                            alt="Company name">
+                        <img class="md:hidden" height="38" width="38" src="images/mobile-footer-logo.png"
+                            alt="Company name">
+                        <p class="font-semibold text-xl md:text-[30px] leading-7 text-black">Home Assistant</p>
+                        <div class="flex md:hidden space-x-6">
+                            <a href="#" class="text-gray-400 hover:text-gray-500">
+                                <span class="sr-only">Instagram</span>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M10 1.80187C12.6701 1.80187 12.9863 1.81203 14.0408 1.86008C15.0158 1.90461 15.5453 2.0675 15.8977 2.20445C16.3645 2.38586 16.6976 2.60258 17.0475 2.9525C17.3975 3.30242 17.6141 3.63555 17.7955 4.10227C17.9325 4.45469 18.0954 4.98422 18.1399 5.95914C18.188 7.01367 18.1981 7.32992 18.1981 10C18.1981 12.6702 18.188 12.9864 18.1399 14.0409C18.0954 15.0159 17.9325 15.5453 17.7955 15.8977C17.6141 16.3645 17.3974 16.6977 17.0475 17.0476C16.6976 17.3975 16.3645 17.6142 15.8977 17.7955C15.5453 17.9325 15.0158 18.0955 14.0408 18.1399C12.9865 18.188 12.6702 18.1982 10 18.1982C7.32969 18.1982 7.01344 18.188 5.95914 18.1399C4.98414 18.0954 4.45469 17.9325 4.10227 17.7955C3.63555 17.6142 3.30234 17.3975 2.95242 17.0476C2.6025 16.6976 2.38578 16.3645 2.20445 15.8977C2.0675 15.5454 1.90453 15.0159 1.86008 14.0409C1.81195 12.9864 1.8018 12.6702 1.8018 10C1.8018 7.32992 1.81195 7.01367 1.86008 5.95922C1.90461 4.98422 2.0675 4.45469 2.20445 4.10227C2.38578 3.63555 2.6025 3.30242 2.95242 2.9525C3.30242 2.6025 3.63555 2.38586 4.10227 2.20445C4.45461 2.0675 4.98414 1.90461 5.95914 1.86008C7.01359 1.81203 7.32984 1.80187 10 1.80187ZM10 0C7.28414 0 6.94359 0.0114844 5.87703 0.0601562C4.81258 0.10875 4.08562 0.277812 3.44961 0.525C2.79195 0.780547 2.2343 1.1225 1.67836 1.67844C1.12242 2.23438 0.780547 2.79203 0.525 3.44961C0.277734 4.0857 0.10875 4.81266 0.0601562 5.87703C0.0114844 6.94359 0 7.28414 0 10C0 12.7159 0.0114844 13.0564 0.0601562 14.123C0.10875 15.1874 0.277734 15.9144 0.525 16.5504C0.780469 17.208 1.12242 17.7657 1.67836 18.3216C2.2343 18.8776 2.79195 19.2195 3.44961 19.475C4.0857 19.7223 4.81258 19.8913 5.87695 19.9398C6.94359 19.9885 7.28414 20 10 20C12.7159 20 13.0564 19.9885 14.123 19.9398C15.1873 19.8913 15.9143 19.7223 16.5503 19.475C17.208 19.2195 17.7656 18.8776 18.3216 18.3216C18.8775 17.7657 19.2195 17.208 19.475 16.5504C19.7222 15.9143 19.8913 15.1874 19.9398 14.123C19.9885 13.0564 20 12.7159 20 10C20 7.28414 19.9885 6.94359 19.9398 5.87703C19.8913 4.81266 19.7222 4.0857 19.475 3.44969C19.2195 2.79203 18.8775 2.23438 18.3216 1.67844C17.7656 1.1225 17.208 0.780469 16.5504 0.525C15.9143 0.277812 15.1873 0.10875 14.123 0.0601562C13.0564 0.0114844 12.7159 0 10 0ZM10 4.86484C7.16391 4.86484 4.86484 7.16406 4.86484 10C4.86484 12.8361 7.16391 15.1352 10 15.1352C12.836 15.1352 15.1352 12.8361 15.1352 10C15.1352 7.16398 12.836 4.86484 10 4.86484ZM10 13.3334C8.15906 13.3334 6.66664 11.8409 6.66664 10C6.66664 8.15906 8.15906 6.66664 10 6.66664C11.8409 6.66664 13.3334 8.15906 13.3334 10C13.3334 11.8409 11.8409 13.3334 10 13.3334ZM16.538 4.66195C16.538 5.32477 16.0008 5.86195 15.338 5.86195C14.6752 5.86195 14.138 5.32477 14.138 4.66195C14.138 3.99922 14.6752 3.46195 15.338 3.46195C16.0008 3.46195 16.538 3.99922 16.538 4.66195Z"
+                                        fill="#0A0A08" />
+                                </svg>
+                            </a>
+
+                            <a href="#" class="text-gray-400 hover:text-gray-500">
+                                <span class="sr-only">GitHub</span>
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M5.5625 16.1875C3.6875 16.8125 1.8125 15.5625 1.1875 14.9375M6.1875 16.8125C6.1875 16.8125 5.5625 14.3125 6.8125 13.0625C6.8125 13.0625 4.3125 13.0625 2.4375 11.1875C0.5625 9.3125 1.1875 5.5625 2.4375 4.3125C1.8125 2.4375 3.0625 1.1875 3.0625 1.1875C3.0625 1.1875 4.9375 1.1875 6.1875 2.4375C7.4375 1.8125 10.5625 1.8125 11.8125 2.4375C13.0625 1.1875 14.9375 1.1875 14.9375 1.1875C14.9375 1.1875 16.1875 2.4375 15.5625 4.3125C16.8125 5.5625 17.4375 9.3125 15.5625 11.1875C13.6875 13.0625 11.1875 13.0625 11.1875 13.0625C12.4375 14.3125 11.8125 16.8125 11.8125 16.8125H6.1875Z"
+                                        stroke="black" stroke-width="1.875" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </a>
+
+                            <a href="#" class="text-gray-400 hover:text-gray-500">
+                                <span class="sr-only">Twitter</span>
+                                <svg width="20" height="17" viewBox="0 0 20 17" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M17.8906 4.34359C17.7969 4.67172 17.4001 5.50532 16.7219 6.29653C16.2698 14.9715 7.84908 17.7972 2.08457 14.8867C1.29336 13.8412 4.93857 14.2651 6.26667 12.2588C1.23685 9.68744 1.63245 2.82087 2.64972 3.10344C5.02334 6.29653 8.83811 6.5791 9.45971 6.29653C9.45971 5.56184 9.14891 3.97942 10.8726 2.65132C11.8616 1.94489 13.9297 1.31234 15.8047 3.34359C16.125 3.55453 16.5859 3.64828 17.2734 3.49203C17.6797 3.28109 18.2262 3.42684 17.9453 4.15609"
+                                        stroke="black" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </a>
+
+                            <a href="#" class="text-gray-400 hover:text-gray-500">
+                                <span class="sr-only">Facebook</span>
+                                <svg width="12" height="18" viewBox="0 0 12 18" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M11 4.25016H8.49458C8.04208 4.25016 7.675 4.61683 7.675 5.06975V7.94475H11L10.5129 11.1102H7.67542V16.9168H4.01875V11.1102H1V7.94475H3.97958L4.01875 4.94058L4.01333 4.39475C4.00898 3.9615 4.09055 3.53169 4.25333 3.13017C4.41611 2.72864 4.65686 2.36337 4.96167 2.05545C5.26648 1.74754 5.62931 1.50311 6.02916 1.33628C6.42902 1.16944 6.85798 1.08353 7.29125 1.0835H11V4.25016Z"
+                                        stroke="black" stroke-width="1.58333" stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="mt-[35px] md:mt-[47px] border-t border-grey-secondary py-[21px] md:py-[26px] px-[40px] md:px-0">
+                <span class="text-xs text-black opacity-[.66] inline-block text-center md:text-left"><span
+                        class="underline underline-offset-1">Copyright © 2022 Home Assistant, Inc. Read
+                        Privacy</span> and <span class="underline underline-offset-1">Terms &
+                        Conditions</span></span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- searchBox -->
+<div class="hidden h-full w-full fixed z-30  bg-[#0101014f] top-0"  id="mobile-search-box">
+    <div class="w-[90%] mx-auto left-[-50%] translate-[-50%] mt-5">
+        <div class="flex justify-between">
+            <div class="  shadow-md shadow-gray-600 w-full mr-3 bg-white p-3 rounded-full flex">
+                <input  class="w-[80%] pl-3 text-lg  font-semibold text-black focus:outline-none"  placeholder="alright">
+                <p
+                class="ml-auto float-right text-black text-[18px] group rounded-md inline-flex items-center text-base font-semibold hover:text-gray-900 ">
+                <img width="19.19" src="images/search.png" />
+                </p>
+               
+            </div>
+            <div class="flex items-center px-5  shadow-md shadow-gray-600 bg-white p-3 rounded-full search-close cursor-pointer">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="black"/>
+                    </svg>                        
+            </div>
+
+        </div>
+        <div class=" bg-white h-fit rounded-3xl p-4 shadow-xl shadow-gray-900 mt-5">
+            <div class="">
+                <div class="bg-[#F8F8F8] rounded-sm p-3 mb-3">
+                    <div class="flex justify-between font-semibold text-[16px]">
+                        <p class="">Onboarding Home Assistant</p>
+                        <p class="opacity-40">Getting Started</p>
+                    </div>
+                    <div class="bg-white rounded-sm p-1 mt-2">
+                        <p class="text-[#41BDF5] text-[14px]">Alright<span class="text-black opacity-40">, you made it here. The tough part is done.</span></p>
+                    </div>
+
+                </div>
+                <div class="bg-[#F8F8F8] rounded-sm p-3 mb-3">
+                    <div class="flex justify-between font-semibold text-[16px]">
+                        <p class="">Splitting up the configuration</p>
+                        <p class="opacity-40">Docs / Configuration</p>
+                    </div>
+                    <div class="bg-white rounded-sm p-1 mt-2">
+                        <p class="text-[#41BDF5] text-[14px]">Alright<span class="text-black opacity-40">, so we’ve got the single integrations and the include statements in the base ...</span></p>
+                    </div>
+
+                </div>
+                <div class="bg-[#F8F8F8] rounded-sm p-3 mb-3">
+                    <div class="flex justify-between font-semibold text-[16px]">
+                        <p class="">Template Light</p>
+                        <p class="opacity-40">Integration</p>
+                    </div>
+                    <div class="bg-white rounded-sm p-1 mt-2">
+                        <p class="text-[#41BDF5] text-[14px]">Template Light<span class="text-black opacity-40"></span></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div>
+    <img class="absolute hidden md:block" src="images/background.png"/>
+    <img class="absolute md:hidden right-0" src="images/backyard.png"/>
+    <div class="container mx-auto px-4 md:px-6 lg:px-8 text-center hidden md:block">
+        <a href="#">
+            <div class="py-[9px] px-[20px] flex-shrink-0 inline-block text-green-800 text-xs font-medium bg-brand-secondary rounded-full">
+                <svg class="inline-block mb-[3px]" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.794 11.3827L8.3003 1.09884C8.16878 0.851512 7.97936 0.646071 7.75114 0.503221C7.52291 0.36037 7.26394 0.285156 7.0003 0.285156C6.73667 0.285156 6.4777 0.36037 6.24947 0.503221C6.02125 0.646071 5.83183 0.851512 5.70031 1.09884V1.09884L0.206565 11.3827C0.0731077 11.6288 0.00218262 11.9087 0.000991809 12.194C-0.000199007 12.4794 0.068387 12.76 0.199785 13.0074C0.331183 13.2547 0.520713 13.4601 0.74913 13.6025C0.977546 13.7449 1.23671 13.8194 1.50031 13.8183H12.5003C12.7639 13.8194 13.0231 13.7449 13.2515 13.6025C13.4799 13.4601 13.6694 13.2547 13.8008 13.0074C13.9322 12.76 14.0008 12.4794 13.9996 12.194C13.9984 11.9087 13.9275 11.6288 13.794 11.3827V11.3827ZM6.50031 5.69951C6.50031 5.55596 6.55298 5.41829 6.64675 5.31679C6.74052 5.21528 6.8677 5.15826 7.0003 5.15826C7.13291 5.15826 7.26009 5.21528 7.35386 5.31679C7.44763 5.41829 7.5003 5.55596 7.5003 5.69951V8.40578C7.5003 8.54933 7.44763 8.687 7.35386 8.78851C7.26009 8.89001 7.13291 8.94704 7.0003 8.94704C6.8677 8.94704 6.74052 8.89001 6.64675 8.78851C6.55298 8.687 6.50031 8.54933 6.50031 8.40578V5.69951ZM7.0003 11.6533C6.85197 11.6533 6.70696 11.6057 6.58363 11.5165C6.46029 11.4273 6.36416 11.3005 6.3074 11.1521C6.25063 11.0038 6.23578 10.8405 6.26472 10.683C6.29366 10.5256 6.36509 10.3809 6.46998 10.2673C6.57486 10.1538 6.7085 10.0765 6.85399 10.0451C6.99947 10.0138 7.15027 10.0299 7.28732 10.0913C7.42436 10.1528 7.54149 10.2569 7.62391 10.3904C7.70632 10.5239 7.7503 10.6809 7.7503 10.8414C7.7503 11.0568 7.67129 11.2633 7.53063 11.4155C7.38998 11.5678 7.19922 11.6533 7.0003 11.6533Z" fill="black"/>
+                </svg>
+                <span class="pl-[14px] font-semibold text-sm inline-block">Important Announcement</span>
+                <span class="pl-[4px] text-sm inline-block">New release breaks 124.</span>
+            </div>
+        </a>
+    </div>
+    <div class="max-w-[90%] md:max-w-[970px] md:mx-auto px-7 md:px-6 lg:px-8 md:text-center mt-[42px] md:mt-9">
+        <span class="text-[32px] md:text-[68px] font-extrabold leading-[38px] md:leading-[81px] mx-auto">We build together the future of the Open Home</span>
+    </div>
+    <div class="max-w-[80%] md:max-w-[970px] md:mx-auto px-7 md:px-6 lg:px-8 md:text-center mt-4 md:mt-6">
+        <span class="text-base md:text-[28px] font-semibold leading-[19px] md:leading-8 text-grey-text opacity-[.66]">The smart home we dream it’s private, local and powerful.</span>
+    </div>
+    <div class="max-w-[300px] md:max-w-[970px] md:mx-auto px-7 md:px-6 lg:px-8 md:text-center mt-11">
+        <button type="button" class="md:inline-flex font-extrabold items-center px-[44px] py-[14px] md:px-[57px] md:py-[19px] border border-transparent text-[18px] md:text-[24px] rounded-[10px] text-white bg-blue-btn leading-5 md:leading-[26px]">Get Started</button>
+        <button type="button" class="mt-2 md:mt-0 inline-flex font-extrabold items-center px-[32px] py-[14px] md:px-[57px] md:py-[19px] border border-black border-opacity-10  text-[18px] md:text-[24px] rounded-[10px] text-black-text  leading-5 md:leading-[26px] bg-white md:ml-6">
+            Learn More 
+            <svg class="ml-3 hidden md:block" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="black" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M14.625 12L10.875 9.375V14.625L14.625 12Z" fill="black" stroke="black" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg class="ml-2 md:hidden" width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.5 16.625C13.435 16.625 16.625 13.435 16.625 9.5C16.625 5.56497 13.435 2.375 9.5 2.375C5.56497 2.375 2.375 5.56497 2.375 9.5C2.375 13.435 5.56497 16.625 9.5 16.625Z" stroke="black" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M11.5781 9.5L8.60938 7.42188V11.5781L11.5781 9.5Z" fill="black" stroke="black" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+    </div>
+    <div class="hidden md:block max-w-[1170px] min-h-[619px] mx-auto px-4 md:px-6 lg:px-8 text-center mt-11">
+        <div class="relative">
+            <div class="relative max-w-[420px] rounded-[30px] p-3 bg-[#FAFBFA] z-10" style="box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.12);">
+                <img src="images/card-1.png"/>
+                <img src="images/card-2.png"/>
+                <img src="images/card-3.png"/>
+            </div>
+            <img class="absolute top-0 right-0" src="images/bed_flat.png"/>
+            <span class="text-black-text px-[19px] py-[10px] font-medium text-[14px] rounded-full border-black border-[1.24px] absolute top-[62px] right-[62px]">3 bed flat</span>
+        </div>
+    </div>
+    <div class="max-w-[1170px] mx-auto px-4 md:px-6 lg:px-8 text-center mt-[135px] md:mt-9">
+        <img class="absolute right-0 z-10 hidden md:block" src="images/background2.png"/>
+        <img class="absolute left-0 top-[1600px] z-10 hidden md:block" src="images/background3.png"/>
+        <img class="absolute left-0 top-[2800px] z-10 hidden md:block" src="images/background4.png"/>
+        <div class="mt-10 pb-12 bg-white">
+            <div class="relative">
+                <div class="absolute"></div>
+                    <div class="relative container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-4xl mx-auto">
+                        <div class="rounded-lg bg-white grid grid-cols-4">
+                            <div class="flex flex-col py-[24px] md:p-6 text-center col-span-2 md:col-span-1">
+                                <dt class="order-2 text-sm md:text-xl leading-5 md:leading-8 font-semibold text-black">Open Homes</dt>
+                                <dd class="order-1 text-[32px] md:text-5xl tracking-tight font-extrabold text-black leading-10 md:leading-[82px]">500k</dd>
+                            </div>
+                            <div class="flex flex-col py-[24px] md:p-6 text-center col-span-2 md:col-span-1">
+                                <dt class="order-2 text-sm md:text-xl leading-5 md:leading-8 font-semibold text-black">Integrations</dt>
+                                <dd class="order-1 text-[32px] md:text-5xl tracking-tight font-extrabold text-black leading-10 md:leading-[82px]">1000+</dd>
+                            </div>
+                            <div class="flex flex-col py-[24px] md:p-6 text-center col-span-2 md:col-span-1">
+                                <dt class="order-2 text-sm md:text-xl leading-5 md:leading-8 font-semibold text-black">Devices</dt>
+                                <dd class="order-1 text-[32px] md:text-5xl tracking-tight font-extrabold text-black leading-10 md:leading-[82px]">100k+</dd>
+                            </div>
+                            <div class="flex flex-col py-[24px] md:p-6 text-center col-span-2 md:col-span-1">
+                                <dt class="order-2 text-sm md:text-xl leading-5 md:leading-8 font-semibold text-black">Github Stars</dt>
+                                <dd class="order-1 text-[32px] md:text-5xl tracking-tight font-extrabold text-black leading-10 md:leading-[82px]">50k</dd>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img class="mx-auto relative z-20" src="images/join_community.png"/>
+    </div>
+    <div class="max-w-[970px] mx-auto px-4 md:px-6 lg:px-8 text-center mt-11 relative z-20">
+        <button type="button" class="inline-flex font-bold items-center px-[18px] py-[13px] md:px-[26px] md:py-[21px] border-2 border-black border-opacity-10 text-[14px] md:text-[18px] leading-[17px] md:leading-[20px] rounded-[10px] text-black bg-white">FORUM</button>
+        <button type="button" class="inline-flex font-bold items-center px-[18px] py-[13px] md:px-[26px] md:py-[21px] border-2 border-black border-opacity-10 text-[14px] md:text-[18px] leading-[17px] md:leading-[20px] rounded-[10px] text-black bg-white ml-[15px] md:ml-[21px]">DISCORD</button>
+        <button type="button" class="inline-flex font-bold items-center px-[18px] py-[13px] md:px-[26px] md:py-[21px] border-2 border-black border-opacity-10 text-[14px] md:text-[18px] leading-[17px] md:leading-[20px] rounded-[10px] text-black bg-white ml-[15px] md:ml-[21px]">GITHUB</button>
+    </div>
+    <div class="container mx-auto mt-11 hidden md:block relative z-10">
+        <div class="xl:grid xl:grid-cols-9 gap-20">
+            <div class="col-span-4">
+                <div>
+                    <span class="font-extrabold text-black text-[44px]">Beyond the ordinary</span>
+                </div>
+                <div class="mt-9">
+                    <span class="font-extrabold text-black opacity-[.66] text-[28px] leading-[33px]">People do more with their devices. With the power of Home Assistant use blueprints, custom automation flows or even Node-Red to empower any project you can imagine.</span>
+                </div>
+                <div class="mt-11">
+                    <button type="button" class="inline-flex leading-[20px] font-bold items-center px-[26px] bg-white py-[21px] border-2 border-grey-secondary text-[24px] rounded-[10px] text-black">
+                        See what people make
+                        <svg class="ml-[25px]" width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.7625 0.00166702L12.7625 5.66833L0.125828 5.66833L0.0833263 8.51583L12.7625 8.51583V14.1683L19.8458 7.085L12.7625 0.00166702Z" fill="black"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="col-span-5 relative z-10">
+                <img src="images/beyond_ordinary.png"/>
+            </div>
+        </div>
+    </div>
+    <div class="container mx-auto mt-[65px] md:mt-[250px]">
+        <div>
+            <span class="font-extrabold text-[22px] md:text-[44px] text-black leading-6 md:leading-[52px]">Our Values</span>
+        </div>
+        <div class="flex md:grid md:grid-cols-2 space-x-4 md:space-x-0 md:gap-[85px] mt-4 md:mt-[59px] relative z-10 overflow-x-auto md:overflow-auto">
+            <div class="col-span-1 h-[344px] md:h-[447px] min-w-[300px] md:min-w-0 max-w-[480px] rounded-[20px] bg-black-primary pl-[46.5px] pt-[75px] pb-[75px] pr-[54px] md:pt-[41px] md:pl-[42px] md:pr-[90px] md:pb-[64px]">
+                <img class="w-[42px] md:w-[84px]" src="images/glass.png"/>
+                <div class="mt-[37px] md:mt-[86px]"><span class=" text-white font-extrabold text-[24px] md:text-[32px]">Private</span></div>
+                <div class="pt-4 md:pt-8"><span class="text-white opacity-[.66] font-medium text-base md:text-2xl leading-[28px]">On the other hand, we denounce with righteous indignation and dislike men.</span></div>
+            </div>
+            <div class="col-span-1 h-[344px] md:h-[447px] min-w-[300px] md:min-w-0 max-w-[480px] rounded-[20px] bg-green-secondary pl-[46.5px] pt-[75px] pb-[75px] pr-[54px] md:pt-[41px] md:pl-[42px] md:pr-[90px] md:pb-[64px]">
+                <img class="w-[42px] md:w-[84px]" src="images/lock.png"/>
+                <div class="mt-[37px] md:mt-[86px]"><span class=" text-black font-extrabold text-[24px] md:text-[32px]">Secure</span></div>
+                <div class="pt-4 md:pt-8"><span class="text-black opacity-[.66] font-medium text-base md:text-2xl leading-[28px]">That they cannot foresee the pain and trouble that are bound to ensue.</span></div>
+            </div>
+            <div class="col-span-1 h-[344px] md:h-[447px] min-w-[300px] md:min-w-0 max-w-[480px] rounded-[20px] bg-blue-btn pl-[46.5px] pt-[75px] pb-[75px] pr-[54px] md:pt-[41px] md:pl-[42px] md:pr-[90px] md:pb-[64px]">
+                <img class="w-[42px] md:w-[84px]" src="images/hand.png"/>
+                <div class="mt-[37px] md:mt-[86px]"><span class=" text-black font-extrabold text-[24px] md:text-[32px]">People first</span></div>
+                <div class="pt-4 md:pt-8"><span class="text-black opacity-[.66] font-medium text-base md:text-2xl leading-[28px]">On the other hand, we denounce with righteous indignation and dislike.</span></div>
+            </div>
+            <div class="col-span-1 h-[344px] md:h-[447px] min-w-[300px] md:min-w-0 max-w-[480px] rounded-[20px] bg-grey-third pl-[46.5px] pt-[75px] pb-[75px] pr-[54px] md:pt-[41px] md:pl-[42px] md:pr-[90px] md:pb-[64px]">
+                <img class="w-[42px] md:w-[84px]" src="images/battery.png"/>
+                <div class="mt-[37px] md:mt-[86px]"><span class=" text-white font-extrabold text-[24px] md:text-[32px]">Local</span></div>
+                <div class="pt-4 md:pt-8"><span class="text-white opacity-[.66] font-medium text-base md:text-2xl leading-[28px]">That they cannot foresee the pain and trouble that are bound to ensue.</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="container mx-auto mt-[138px]">
+        <div>
+            <span class="font-extrabold text-[44px] text-black-secondary">Let’s get started!</span>
+        </div>
+        <div class="md:grid md:grid-cols-3 gap-[24px] mt-[57px] relative z-10 space-y-4 md:space-y-0">
+            <div class="grid grid-cols-3 gap-3 md:grid-cols-none col-span-1 max-w-full md:max-w-[320px] rounded-[20px] pl-[31px] pb-0 md:pb-[35px] pr-[22px] md:pr-0 relative" style="box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.1);">
+                <span class="absolute hidden md:block top-[25px] right-[25px] font-semibold text-[17px] opacity-30 text-black tracking-[.25em]">EASIEST </span>
+                <img class="pt-[30px] md:pt-[46px] col-span-1" src="images/device1.png"/>
+                <div class="pt-[30px] md:pt-0 col-span-2">
+                    <div>
+                        <span class="font-bold text-black-secondary text-[22px] md:text-4xl leading-[22px] md:leading-[37px]">Start with the Yellow</span>
+                    </div>
+                    <div class="mt-3 md:mt-6 pr-0 md:pr-[87px] pb-[20px] md:pb-0">
+                        <span class="font-medium text-black-secondary text-opacity-[.66] text-sm md:text-base leading-[19px] md:leading-6">The most complete and supported HA experience </span>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-3 md:grid-cols-none gap-3 col-span-1 max-w-full md:max-w-[320px] rounded-[20px] pl-[31px] pb-0 md:pb-[35px] pr-[22px] md:pr-0 relative" style="box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.1);">
+                <span class="absolute hidden md:block top-[25px] right-[25px] font-semibold text-[17px] opacity-30 text-black tracking-[.25em]">EASY </span>
+                <img class="pt-[30px] md:pt-[54px] col-span-1" src="images/device2.png"/>
+                <div class="pt-[30px] md:pt-0 col-span-2">
+                    <div>
+                        <span class="font-bold text-black-secondary text-[22px] md:text-4xl leading-[22px] md:leading-[37px]">Start with your Raspberry</span>
+                    </div>
+                    <div class="mt-3 md:mt-6 pr-0 md:pr-[87px] pb-[20px] md:pb-0">
+                        <span class="font-medium text-black-secondary text-opacity-[.66] text-sm md:text-base leading-[19px] md:leading-6">Are you a developer? <br></span>
+                        <span class="underline underline-offset-4 font-medium text-black-secondary text-opacity-[.66] text-sm md:text-base leading-[19px] md:leading-6">Go down the hacky path.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-3 md:grid-cols-none gap-3 col-span-1 max-w-full md:max-w-[320px] rounded-[20px] pl-[31px] pb-0 md:pb-[35px] pr-[22px] md:pr-0 relative" style="box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.1);">
+                <span class="absolute hidden md:block top-[25px] right-[25px] font-semibold text-[17px] opacity-30 text-black tracking-[.25em]">DIY </span>
+                <img class="pt-[30px] md:pt-[54px] col-span-1" src="images/device3.png"/>
+                <div class="pt-[30px] md:pt-0 col-span-2">
+                    <div>
+                        <span class="font-bold text-black-secondary text-[22px] md:text-4xl leading-[22px] md:leading-[37px]">Or choose another option</span>
+                    </div>
+                    <div class="mt-3 md:mt-6 pr-0 md:pr-[87px] pb-[20px] md:pb-0">
+                        <span class="font-medium text-black-secondary text-opacity-[.66] text-sm md:text-base leading-[19px] md:leading-6">Options like NUC, Virtual Machine, Docker, Linux, etc<br></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="max-w-[1170px] mx-auto px-4 md:px-6 lg:px-8 mt-[131px] text-center">
+        <div class="relative text-left md:text-center max-w-[343px] md:max-w-full mx-auto">
+            <img class="absolute top-[70px] left-[180px] hidden md:block" src="images/dot_group.png"/>
+            <img class="absolute top-[25px] left-[15px] md:hidden" src="images/dot_mobile.png"/>
+            <span class="font-extrabold text-[22px] md:text-[44px] text-black-secondary laading-7 md:leading-[49.63px]">Make all your devices* <br>
+                work together
+            </span>
+        </div>
+        <div class="mt-[33px] md:mt-[43px]">
+            <div class="mx-auto w-full max-w-xs">
+                <label for="search" class="sr-only">Search</label>
+                <div class="relative text-white focus-within:text-gray-400">
+                <div class="absolute inset-y-0 left-0 pl-[26px] flex items-center pointer-events-none">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19.75 17.5833L14.1665 11.9998C15.1987 10.4311 15.6122 8.53508 15.3267 6.67898C15.0413 4.82288 14.0774 3.1387 12.6215 1.95252C11.1657 0.76633 9.32149 0.162516 7.446 0.257981C5.57052 0.353446 3.79717 1.1414 2.46928 2.46928C1.1414 3.79717 0.353446 5.57052 0.257981 7.446C0.162516 9.32149 0.76633 11.1657 1.95252 12.6215C3.1387 14.0774 4.82288 15.0413 6.67898 15.3267C8.53508 15.6122 10.4311 15.1987 11.9998 14.1665L17.5833 19.75L19.75 17.5833ZM2.41666 7.83333C2.41666 4.84658 4.84658 2.41666 7.83333 2.41666C10.8201 2.41666 13.25 4.84658 13.25 7.83333C13.25 10.8201 10.8201 13.25 7.83333 13.25C4.84658 13.25 2.41666 10.8201 2.41666 7.83333Z" fill="#00000066"/>
+                    </svg>
+                </div>
+                <input id="search" name="search" class="max-w-[343px] md:max-w-[316px] max-h-[61px] md:w-full rounded-[40px] py-[22px] pl-[68px] pr-[39px] text-base placeholder-black-secondary placeholder-opacity-30 font-semibold text-black-secondary" type="search" style="box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);" placeholder="Search for Xiaomi Mi Rob..">
+                </div>
+            </div>
+        </div>
+        <div class="mt-[19px] md:mt-[37px]"><span class="font-medium text-sm text-black-secondary opacity-[.66]">* 39.542 devices as of August 2022</span></div>
+    </div>
+
+    <div class="mx-auto mt-[50px] md:mt-[110px] pb-[60px] md:pb-[180px] text-center relative z-50" style="background: linear-gradient(180deg, #01002C -3.36%, #020054 104.31%);">
+        <div class="relative pt-[44px] md:pt-[142px] px-9 md:px-[350px]">
+            <span class="font-bold text-[22px] md:text-[44px] text-white leading-[27px] md:leading-[54.03px]">We possibly don’t work with all the brands<br></span>
+            <span class="font-bold text-[22px] md:text-[44px] text-blue-btn leading-[27px] md:leading-[54.03px]">in this universe.</span>
+        </div>
+        <div class="min-h-[58px] mt-[40px] md:mt-[100px] ml-[-180px]" style="background-image: url(images/logo3.png);"></div>
+        <div class="min-h-[38px] mt-[25px] md:mt-[20px] ml-[20px]" style="background-image: url(images/logo2.png);"></div>
+        <div class="min-h-[58px] mt-[25px] md:mt-[20px] ml-[100px]" style="background-image: url(images/logo1.png);"></div>
+    </div>
+
+    <div class="max-w-[1170px] mx-auto px-4 md:px-6 lg:px-8 mt-[148px] text-center">
+        <div class="relative">
+            <span class="font-extrabold text-[44px] text-black-secondary leading-[49.63px]">Said about us
+            </span>
+        </div>
+        <div class="mt-10 pb-12 bg-white sm:pb-16">
+            <div class="relative">
+              <div class="absolute inset-0 h-1/2 bg-gray-50"></div>
+              <div class="relative container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mx-auto">
+                    <dl class="rounded-lg bg-white md:grid md:grid-cols-3 space-y-[60px] md:space-y-0">
+                      <div class="flex flex-col  border-black border-opacity-10 px-[82px] text-center md:border-0 md:border-r">
+                        <dt class="order-2 mt-[21px] text-lg leading-6 font-medium text-gray-500"><img class="mx-auto" src="images/aboutus1.png"/></dt>
+                        <dd class="order-1 text-sm tracking-tight font-medium text-black-secondary text-opacity-[.66] max-h-[90px]">“You can still get to your baby monitor via an app or the web, but a potential hacker won't even be able to find it.”</dd>
+                      </div>
+                      <div class="flex flex-col border-black border-opacity-10 px-[64px] text-center md:border-0 md:border-l md:border-r">
+                        <dt class="order-2 mt-[26px] text-lg leading-6 font-medium text-gray-500"><img class="mx-auto"  src="images/aboutus2.png"/></dt>
+                        <dd class="order-1 text-sm tracking-tight font-medium text-black-secondary text-opacity-[.66] max-h-[90px]">“Setup is eased with a network discovery component that scans the network, and if you have a supported device, sets it up automatically.”</dd>
+                      </div>
+                      <div class="flex flex-col border-black border-opacity-10 px-[82px] text-center md:border-0 md:border-l">
+                        <dt class="order-2 mt-[36px] text-lg leading-6 font-medium text-gray-500"><img class="mx-auto" src="images/aboutus3.png"/></dt>
+                        <dd class="order-1 text-sm tracking-tight font-medium text-black-secondary text-opacity-[.66] max-h-[90px]">“I think anyone with more that a couple smart gadgets and even a slight interest in taking the next step really needs to check Home Assistant out.”</dd>
+                      </div>
+                    </dl>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-[212px] mx-auto text-center hidden md:block">
+        <div>
+            <span class="font-extrabold text-[44px] text-black-secondary leading-[49.63px]">Popular videos</span>
+        </div>
+        <div class="mt-[21px]">
+            <span class="font-semibold text-2xl text-blue-btn leading-6">#madewithHA</span>
+        </div>
+        <div class="wrap mt-[77px]">
+            <div class="frame main-news__items-wrapp" id="cycleitems" style="overflow: hidden;">
+                <ul class="clearfix main-news__items-wrapp" style="transform: translateZ(0px) translateX(0px); width: 7088px;">
+                  <li class="active">
+                    <img class="scroll-images" src="images/scroll1.png"/>
+                  </li>
+                  <li class="">
+                    <img class="scroll-images" src="images/scroll2.png"/>
+                  </li>
+                  <li class="">
+                    <img class="scroll-images" src="images/scroll3.png"/>
+                  </li>
+                  <li class="">
+                    <img class="scroll-images" src="images/scroll1.png"/>
+                  </li>
+                  <li class="">
+                    <img class="scroll-images" src="images/scroll2.png"/>
+                  </li>
+                  <li class="">
+                    <img class="scroll-images" src="images/scroll3.png"/>
+                  </li>
+                  <li class="">
+                    <img class="scroll-images" src="images/scroll1.png"/>
+                  </li>
+                  
+          
+                </ul>
+              </div>
+            
+              <div class="max-w-[1010px] mt-10 mx-auto relative scrollbar">
+                <div class="handle" style="transform: translateZ(0px) translateX(0px); width: 90px !important; height: 9px !important; top: -2px; position: absolute; border-radius: 30px;">
+                  <div class="mousearea"></div>
+                </div>
+              </div>
+        </div>
+    </div>
+
+    <div class="max-w-[1070px] mx-auto px-4 md:px-6 lg:px-8 mt-[148px] hidden md:block">
+        <div class="xl:grid xl:grid-cols-2 mt-[57px] relative z-10">
+            <div class="col-span-1 pr-[160px]">
+                <div>
+                    <span class="font-semibold text-black-secondary text-4xl leading-11">Our founder’s<br></span>
+                    <span class="font-semibold text-blue-secondary text-4xl">vision</span>
+                </div>
+                <div class="mt-8">
+                    <span class="font-medium text-black-secondary leading-6 text-[18px]">“Home automation should blend with your current workflow, not replace it. For most devices, there is no faster way to control most devices than how you are already doing it today.”<br><br>”With every automation, you always have to think: what will be the impact if it doesn’t work? Home automation is composed of many different systems by many different vendors that speak many different protocols: things will go wrong.”</span>
+                </div>
+                <div class="mt-7">
+                    <button type="button" class="inline-flex font-semibold items-center px-[17px] py-[10px] border-2 border-blue-secondary text-lg leading-[22px] text-blue-btn">Read more...</button>
+                </div>
+            </div>
+            <div class="col-span-1 pl-[30px] relative">
+                <div class="absolute min-h-[210px] top-[70px] left-0 border border-black border-opacity-10"></div>
+                <div>
+                    <span class="font-semibold text-black-secondary text-4xl leading-11">Latest blog<br></span>
+                    <span class="font-semibold text-blue-secondary text-4xl">posts</span>
+                </div>
+                <div>
+                    <div class="mt-8">
+                        <span class="font-medium text-black-secondary text-base leading-5 text-opacity-30"> November 6, 2022<br> </span>
+                        <span class="font-medium text-black-secondary text-base leading-5"> Home Assistant Companion Android App Release 3.0.0 </span>
+                    </div>
+                    <div class="mt-7">
+                        <span class="font-medium text-black-secondary text-base leading-5 text-opacity-30"> October 28, 2022<br> </span>
+                        <span class="font-medium text-black-secondary text-base leading-5"> 0.117: Quick Bar, compact header, a YAML editor, XBox and Template types </span>
+                    </div>
+                    <div class="mt-7">
+                        <span class="font-medium text-black-secondary text-base leading-5 text-opacity-30"> October 21, 2022<br> </span>
+                        <span class="font-medium text-black-secondary text-base leading-5"> Supervisor 249: Resolution center, Stability & Private container registries </span>
+                    </div>
+                    <div class="mt-7">
+                        <button type="button" class="inline-flex font-semibold items-center px-[17px] py-[10px] border-2 border-blue-secondary text-lg leading-[22px] text-blue-btn">All the posts</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-[1070px] relative mx-auto px-4 mb-[86px] ">
+        <img class="absolute right-[32px] md:right-[39px] top-[-115px] md:top-[-24px] -z-20 md:z-10 w-[179px] md:w-[248px]" src="images/mobile2.png"/>
+        <img class="absolute right-[128px] md:right-[178px] top-[-155px] md:top-[-81px] -z-10 md:z-20 w-[181px] md:w-[286px]" src="images/mobile1.png"/>
+        <div class="max-w-[1070px] mx-auto pl-[32px] py-[42px] md:pl-[62px] mt-[207px] rounded-[20px] bg-black relative">
+            <div class="max-w-[520px]">
+                <span class="font-bold text-2xl md:text-5xl text-white leading-7 md:leading-[58px]">Control Home Assistant with your phone</span>
+            </div>
+            <div class="mt-7 md:mt-8">
+                <span class="font-semibold text-sm md:text-2xl text-opacity-[.66] leading-7 text-white">Download now for iOS and Android</span>
+            </div>
+            <div class="mt-[26p] md:backdrop:mt-[38px] ml-[-13px]">
+                <img class="inline-block" src="images/googleplay.png"/>
+                <img class="ml-[13px] md:ml-0 inline-block" src="images/appstore.png"/>
+            </div>
+            <div class="mt-12 hidden md:block">
+                <span class="font-semibold text-white underline underline-offset-1 text-base leading-5">More platforms</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-white" aria-labelledby="footer-heading">
+    <h2 id="footer-heading" class="sr-only">Footer</h2>
+    <div class="container mx-auto py-12 lg:py-16">
+        <div class="xl:grid xl:grid-cols-3 xl:gap-8">
+            <div class="space-y-4 md:space-y-8 xl:col-span-1">
+                <img class="hidden md:block" height="72" width="72" src="images/footer-logo.png" alt="Company name">
+                <img class="md:hidden" height="38" width="38" src="images/mobile-footer-logo.png" alt="Company name">
+                <p class="font-semibold text-xl md:text-[30px] leading-7 text-black">Home Assistant</p>
+                <div class="flex md:hidden space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        <span class="sr-only">Instagram</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 1.80187C12.6701 1.80187 12.9863 1.81203 14.0408 1.86008C15.0158 1.90461 15.5453 2.0675 15.8977 2.20445C16.3645 2.38586 16.6976 2.60258 17.0475 2.9525C17.3975 3.30242 17.6141 3.63555 17.7955 4.10227C17.9325 4.45469 18.0954 4.98422 18.1399 5.95914C18.188 7.01367 18.1981 7.32992 18.1981 10C18.1981 12.6702 18.188 12.9864 18.1399 14.0409C18.0954 15.0159 17.9325 15.5453 17.7955 15.8977C17.6141 16.3645 17.3974 16.6977 17.0475 17.0476C16.6976 17.3975 16.3645 17.6142 15.8977 17.7955C15.5453 17.9325 15.0158 18.0955 14.0408 18.1399C12.9865 18.188 12.6702 18.1982 10 18.1982C7.32969 18.1982 7.01344 18.188 5.95914 18.1399C4.98414 18.0954 4.45469 17.9325 4.10227 17.7955C3.63555 17.6142 3.30234 17.3975 2.95242 17.0476C2.6025 16.6976 2.38578 16.3645 2.20445 15.8977C2.0675 15.5454 1.90453 15.0159 1.86008 14.0409C1.81195 12.9864 1.8018 12.6702 1.8018 10C1.8018 7.32992 1.81195 7.01367 1.86008 5.95922C1.90461 4.98422 2.0675 4.45469 2.20445 4.10227C2.38578 3.63555 2.6025 3.30242 2.95242 2.9525C3.30242 2.6025 3.63555 2.38586 4.10227 2.20445C4.45461 2.0675 4.98414 1.90461 5.95914 1.86008C7.01359 1.81203 7.32984 1.80187 10 1.80187ZM10 0C7.28414 0 6.94359 0.0114844 5.87703 0.0601562C4.81258 0.10875 4.08562 0.277812 3.44961 0.525C2.79195 0.780547 2.2343 1.1225 1.67836 1.67844C1.12242 2.23438 0.780547 2.79203 0.525 3.44961C0.277734 4.0857 0.10875 4.81266 0.0601562 5.87703C0.0114844 6.94359 0 7.28414 0 10C0 12.7159 0.0114844 13.0564 0.0601562 14.123C0.10875 15.1874 0.277734 15.9144 0.525 16.5504C0.780469 17.208 1.12242 17.7657 1.67836 18.3216C2.2343 18.8776 2.79195 19.2195 3.44961 19.475C4.0857 19.7223 4.81258 19.8913 5.87695 19.9398C6.94359 19.9885 7.28414 20 10 20C12.7159 20 13.0564 19.9885 14.123 19.9398C15.1873 19.8913 15.9143 19.7223 16.5503 19.475C17.208 19.2195 17.7656 18.8776 18.3216 18.3216C18.8775 17.7657 19.2195 17.208 19.475 16.5504C19.7222 15.9143 19.8913 15.1874 19.9398 14.123C19.9885 13.0564 20 12.7159 20 10C20 7.28414 19.9885 6.94359 19.9398 5.87703C19.8913 4.81266 19.7222 4.0857 19.475 3.44969C19.2195 2.79203 18.8775 2.23438 18.3216 1.67844C17.7656 1.1225 17.208 0.780469 16.5504 0.525C15.9143 0.277812 15.1873 0.10875 14.123 0.0601562C13.0564 0.0114844 12.7159 0 10 0ZM10 4.86484C7.16391 4.86484 4.86484 7.16406 4.86484 10C4.86484 12.8361 7.16391 15.1352 10 15.1352C12.836 15.1352 15.1352 12.8361 15.1352 10C15.1352 7.16398 12.836 4.86484 10 4.86484ZM10 13.3334C8.15906 13.3334 6.66664 11.8409 6.66664 10C6.66664 8.15906 8.15906 6.66664 10 6.66664C11.8409 6.66664 13.3334 8.15906 13.3334 10C13.3334 11.8409 11.8409 13.3334 10 13.3334ZM16.538 4.66195C16.538 5.32477 16.0008 5.86195 15.338 5.86195C14.6752 5.86195 14.138 5.32477 14.138 4.66195C14.138 3.99922 14.6752 3.46195 15.338 3.46195C16.0008 3.46195 16.538 3.99922 16.538 4.66195Z" fill="#0A0A08"/>
+                        </svg>
+                    </a>
+          
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        <span class="sr-only">GitHub</span>
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.5625 16.1875C3.6875 16.8125 1.8125 15.5625 1.1875 14.9375M6.1875 16.8125C6.1875 16.8125 5.5625 14.3125 6.8125 13.0625C6.8125 13.0625 4.3125 13.0625 2.4375 11.1875C0.5625 9.3125 1.1875 5.5625 2.4375 4.3125C1.8125 2.4375 3.0625 1.1875 3.0625 1.1875C3.0625 1.1875 4.9375 1.1875 6.1875 2.4375C7.4375 1.8125 10.5625 1.8125 11.8125 2.4375C13.0625 1.1875 14.9375 1.1875 14.9375 1.1875C14.9375 1.1875 16.1875 2.4375 15.5625 4.3125C16.8125 5.5625 17.4375 9.3125 15.5625 11.1875C13.6875 13.0625 11.1875 13.0625 11.1875 13.0625C12.4375 14.3125 11.8125 16.8125 11.8125 16.8125H6.1875Z" stroke="black" stroke-width="1.875" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+          
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        <span class="sr-only">Twitter</span>
+                        <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.8906 4.34359C17.7969 4.67172 17.4001 5.50532 16.7219 6.29653C16.2698 14.9715 7.84908 17.7972 2.08457 14.8867C1.29336 13.8412 4.93857 14.2651 6.26667 12.2588C1.23685 9.68744 1.63245 2.82087 2.64972 3.10344C5.02334 6.29653 8.83811 6.5791 9.45971 6.29653C9.45971 5.56184 9.14891 3.97942 10.8726 2.65132C11.8616 1.94489 13.9297 1.31234 15.8047 3.34359C16.125 3.55453 16.5859 3.64828 17.2734 3.49203C17.6797 3.28109 18.2262 3.42684 17.9453 4.15609" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+    
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        <span class="sr-only">Facebook</span>
+                        <svg width="12" height="18" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 4.25016H8.49458C8.04208 4.25016 7.675 4.61683 7.675 5.06975V7.94475H11L10.5129 11.1102H7.67542V16.9168H4.01875V11.1102H1V7.94475H3.97958L4.01875 4.94058L4.01333 4.39475C4.00898 3.9615 4.09055 3.53169 4.25333 3.13017C4.41611 2.72864 4.65686 2.36337 4.96167 2.05545C5.26648 1.74754 5.62931 1.50311 6.02916 1.33628C6.42902 1.16944 6.85798 1.08353 7.29125 1.0835H11V4.25016Z" stroke="black" stroke-width="1.58333" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-12 md:grid grid-cols-2 gap-16 xl:mt-0 xl:col-span-2 hidden">
+                <div class="md:grid md:grid-cols-2 md:gap-8">
+                <div>
+                    <h3 class="font-semibold text-[14px] text-black opacity-[.66] leading-3">ABOUT</h3>
+                    <ul role="list" class="mt-4 space-y-4">
+                        <li>
+                            <a href="discover.html" class="font-semibold text-xl text-black"> Discover </a>
+                        </li>
+
+                        <li>
+                            <a href="story.html" class="font-semibold text-xl text-black"> Our Story </a>
+                        </li>
+
+                        <li>
+                            <a href="blog.html" class="font-semibold text-xl text-black"> Blog </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mt-12 md:mt-0">
+                    <h3 class="font-semibold text-[14px] text-black opacity-[.66] leading-3">SYSTEM</h3>
+                    <ul role="list" class="mt-4 space-y-4">
+                        <li>
+                            <a href="#" class="font-semibold text-xl text-black"> Alerts </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="font-semibold text-xl text-black"> Status </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="font-semibold text-xl text-black"> Sercurity </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="font-semibold text-xl text-black"> Data </a>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+                <div class="md:grid md:grid-cols-2 md:gap-8">
+                <div>
+                    <h3 class="font-semibold text-[14px] text-black opacity-[.66] leading-3">COMMUNITY</h3>
+                    <ul role="list" class="mt-4 space-y-4">
+                        <li>
+                            <a href="#" class="font-semibold text-xl text-black"> Explore </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="font-semibold text-xl text-black"> Discord </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="font-semibold text-xl text-black"> Github </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="font-semibold text-xl text-black"> Data </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mt-12 md:mt-0">
+                    <h3 class="font-semibold text-[14px] text-black opacity-[.66] leading-3">SUPPORT</h3>
+                    <ul role="list" class="mt-4 space-y-4">
+                        <li>
+                            <a href="learn.html" class="font-semibold text-xl text-black"> Learn </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="font-semibold text-xl text-black"> Developer Docs </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="font-semibold text-xl text-black"> Contact </a>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-[35px] md:mt-[47px] border-t border-grey-secondary py-[21px] md:py-[26px] px-[40px] md:px-0">
+            <span class="text-xs text-black opacity-[.66] inline-block text-center md:text-left"><span class="underline underline-offset-1">Copyright © 2022 Home Assistant, Inc. Read Privacy</span> and <span class="underline underline-offset-1">Terms & Conditions</span></span>
+            <div class="hidden md:flex space-x-6 float-right">
+                <a href="#" class="text-gray-400 hover:text-gray-500">
+                    <span class="sr-only">Instagram</span>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 1.80187C12.6701 1.80187 12.9863 1.81203 14.0408 1.86008C15.0158 1.90461 15.5453 2.0675 15.8977 2.20445C16.3645 2.38586 16.6976 2.60258 17.0475 2.9525C17.3975 3.30242 17.6141 3.63555 17.7955 4.10227C17.9325 4.45469 18.0954 4.98422 18.1399 5.95914C18.188 7.01367 18.1981 7.32992 18.1981 10C18.1981 12.6702 18.188 12.9864 18.1399 14.0409C18.0954 15.0159 17.9325 15.5453 17.7955 15.8977C17.6141 16.3645 17.3974 16.6977 17.0475 17.0476C16.6976 17.3975 16.3645 17.6142 15.8977 17.7955C15.5453 17.9325 15.0158 18.0955 14.0408 18.1399C12.9865 18.188 12.6702 18.1982 10 18.1982C7.32969 18.1982 7.01344 18.188 5.95914 18.1399C4.98414 18.0954 4.45469 17.9325 4.10227 17.7955C3.63555 17.6142 3.30234 17.3975 2.95242 17.0476C2.6025 16.6976 2.38578 16.3645 2.20445 15.8977C2.0675 15.5454 1.90453 15.0159 1.86008 14.0409C1.81195 12.9864 1.8018 12.6702 1.8018 10C1.8018 7.32992 1.81195 7.01367 1.86008 5.95922C1.90461 4.98422 2.0675 4.45469 2.20445 4.10227C2.38578 3.63555 2.6025 3.30242 2.95242 2.9525C3.30242 2.6025 3.63555 2.38586 4.10227 2.20445C4.45461 2.0675 4.98414 1.90461 5.95914 1.86008C7.01359 1.81203 7.32984 1.80187 10 1.80187ZM10 0C7.28414 0 6.94359 0.0114844 5.87703 0.0601562C4.81258 0.10875 4.08562 0.277812 3.44961 0.525C2.79195 0.780547 2.2343 1.1225 1.67836 1.67844C1.12242 2.23438 0.780547 2.79203 0.525 3.44961C0.277734 4.0857 0.10875 4.81266 0.0601562 5.87703C0.0114844 6.94359 0 7.28414 0 10C0 12.7159 0.0114844 13.0564 0.0601562 14.123C0.10875 15.1874 0.277734 15.9144 0.525 16.5504C0.780469 17.208 1.12242 17.7657 1.67836 18.3216C2.2343 18.8776 2.79195 19.2195 3.44961 19.475C4.0857 19.7223 4.81258 19.8913 5.87695 19.9398C6.94359 19.9885 7.28414 20 10 20C12.7159 20 13.0564 19.9885 14.123 19.9398C15.1873 19.8913 15.9143 19.7223 16.5503 19.475C17.208 19.2195 17.7656 18.8776 18.3216 18.3216C18.8775 17.7657 19.2195 17.208 19.475 16.5504C19.7222 15.9143 19.8913 15.1874 19.9398 14.123C19.9885 13.0564 20 12.7159 20 10C20 7.28414 19.9885 6.94359 19.9398 5.87703C19.8913 4.81266 19.7222 4.0857 19.475 3.44969C19.2195 2.79203 18.8775 2.23438 18.3216 1.67844C17.7656 1.1225 17.208 0.780469 16.5504 0.525C15.9143 0.277812 15.1873 0.10875 14.123 0.0601562C13.0564 0.0114844 12.7159 0 10 0ZM10 4.86484C7.16391 4.86484 4.86484 7.16406 4.86484 10C4.86484 12.8361 7.16391 15.1352 10 15.1352C12.836 15.1352 15.1352 12.8361 15.1352 10C15.1352 7.16398 12.836 4.86484 10 4.86484ZM10 13.3334C8.15906 13.3334 6.66664 11.8409 6.66664 10C6.66664 8.15906 8.15906 6.66664 10 6.66664C11.8409 6.66664 13.3334 8.15906 13.3334 10C13.3334 11.8409 11.8409 13.3334 10 13.3334ZM16.538 4.66195C16.538 5.32477 16.0008 5.86195 15.338 5.86195C14.6752 5.86195 14.138 5.32477 14.138 4.66195C14.138 3.99922 14.6752 3.46195 15.338 3.46195C16.0008 3.46195 16.538 3.99922 16.538 4.66195Z" fill="#0A0A08"/>
+                    </svg>
+                </a>
+      
+                <a href="#" class="text-gray-400 hover:text-gray-500">
+                    <span class="sr-only">GitHub</span>
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.5625 16.1875C3.6875 16.8125 1.8125 15.5625 1.1875 14.9375M6.1875 16.8125C6.1875 16.8125 5.5625 14.3125 6.8125 13.0625C6.8125 13.0625 4.3125 13.0625 2.4375 11.1875C0.5625 9.3125 1.1875 5.5625 2.4375 4.3125C1.8125 2.4375 3.0625 1.1875 3.0625 1.1875C3.0625 1.1875 4.9375 1.1875 6.1875 2.4375C7.4375 1.8125 10.5625 1.8125 11.8125 2.4375C13.0625 1.1875 14.9375 1.1875 14.9375 1.1875C14.9375 1.1875 16.1875 2.4375 15.5625 4.3125C16.8125 5.5625 17.4375 9.3125 15.5625 11.1875C13.6875 13.0625 11.1875 13.0625 11.1875 13.0625C12.4375 14.3125 11.8125 16.8125 11.8125 16.8125H6.1875Z" stroke="black" stroke-width="1.875" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+      
+                <a href="#" class="text-gray-400 hover:text-gray-500">
+                    <span class="sr-only">Twitter</span>
+                    <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.8906 4.34359C17.7969 4.67172 17.4001 5.50532 16.7219 6.29653C16.2698 14.9715 7.84908 17.7972 2.08457 14.8867C1.29336 13.8412 4.93857 14.2651 6.26667 12.2588C1.23685 9.68744 1.63245 2.82087 2.64972 3.10344C5.02334 6.29653 8.83811 6.5791 9.45971 6.29653C9.45971 5.56184 9.14891 3.97942 10.8726 2.65132C11.8616 1.94489 13.9297 1.31234 15.8047 3.34359C16.125 3.55453 16.5859 3.64828 17.2734 3.49203C17.6797 3.28109 18.2262 3.42684 17.9453 4.15609" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+
+                <a href="#" class="text-gray-400 hover:text-gray-500">
+                    <span class="sr-only">Facebook</span>
+                    <svg width="12" height="18" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11 4.25016H8.49458C8.04208 4.25016 7.675 4.61683 7.675 5.06975V7.94475H11L10.5129 11.1102H7.67542V16.9168H4.01875V11.1102H1V7.94475H3.97958L4.01875 4.94058L4.01333 4.39475C4.00898 3.9615 4.09055 3.53169 4.25333 3.13017C4.41611 2.72864 4.65686 2.36337 4.96167 2.05545C5.26648 1.74754 5.62931 1.50311 6.02916 1.33628C6.42902 1.16944 6.85798 1.08353 7.29125 1.0835H11V4.25016Z" stroke="black" stroke-width="1.58333" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/sly.min.js"></script>
+<script src="js/stopExecutionOnTimeout.js"></script>
+<script src="js/home.js"></script>
+</html>

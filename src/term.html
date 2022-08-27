@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HA Website</title>
+    <link rel="stylesheet" href="dist/output.css" />
+    
+    <style>
+        nav span {
+            border-bottom: 2px solid transparent;
+        }
+        .active span {
+            border-bottom: 2px solid black !important;
+        }
+    </style>
+    
+</head>
+<body>
+
+   <!-- header -->
+   <header class="relative bg-white">
+    <div class="container mx-auto">
+        <div class="flex justify-between items-center py-[15px] md:py-[61px] space-x-10">
+            <div class="flex justify-start lg:w-0 lg:flex-1">
+                <a href="home.html">
+                    <img src="images/page_logo.png" class="w-[32px] h-[32px]" alt="Page Logo">
+                </a>
+                <span class="md:flex hidden font-semibold text-xl pl-[11px]">Home Assistant</span>
+                <span class="md:flex hidden font-medium text-sm pt-[5px] pl-[5px]"> 22.09</span>
+                <p class="md:flex hidden px-1 m-2 bg-[#0267FF] rounded-sm text-[8px] h-3 font-semibold text-white">
+                    LS</p>
+            </div>
+            <!-- <img src="images/header_circle.png" class="absolute top-[-10px] hidden md:flex"/> -->
+            <!-- <img src="images/mobile_circle1.png" class="absolute top-0 right-0 flex md:hidden"/> -->
+            <div class="flex items-center">
+                <nav class="hidden md:flex ">
+                    <div class="px-3 xl:px-5 active">
+                        <a href="discover.html"
+                            class="text-black text-[18px] group rounded-md inline-flex items-center text-base font-semibold hover:text-gray-900"
+                            aria-expanded="false">
+                            <span>DISCOVER</span>
+                        </a>
+                    </div>
+                    <div class="px-3 xl:px-5">
+                        <a href="learn.html"
+                            class="text-black text-[18px] group rounded-md inline-flex items-center text-base font-semibold hover:text-gray-900"
+                            aria-expanded="false">
+                            <span>LEARN</span>
+                        </a>
+                    </div>
+                    <div class="px-3 xl:px-5">
+                        <a href="build.html"
+                            class="text-black text-[18px] group rounded-md inline-flex items-center text-base font-semibold hover:text-gray-900"
+                            aria-expanded="false">
+                            <span>BUILD</span>
+                        </a>
+                    </div>
+                    <div class="px-3 xl:px-5">
+                        <a href="story.html"
+                            class="text-black text-[18px] group rounded-md inline-flex items-center text-base font-semibold hover:text-gray-900"
+                            aria-expanded="false">
+                            <span>DEMOS</span>
+                        </a>
+                    </div>
+                    <div class="px-3 xl:px-5 ml-10">
+                        <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
+                        <a href="blog.html"
+                            class="text-black text-[18px] group rounded-md inline-flex items-center text-base font-semibold hover:text-gray-900"
+                            aria-expanded="false">
+                            <span>BLOG</span>
+                        </a>
+                    </div>
+                </nav>
+                <div class="ml-0 lg:ml-5">
+                    <div class="flex items-center">
+                        <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
+                        <div class="relative" id="search-box">
+                            <div class="flex items-center">
+                                <p
+                                class="text-black text-[18px] group rounded-md inline-flex items-center text-base font-semibold hover:text-gray-900 cursor-pointer search-open">
+                                <img width="19.19" src="images/search.png" />
+                            </p>
+                            </div>
+                            <div class="search-result absolute right-[-13px] z-30 w-[300px] md:w-[500px] hidden bg-white h-fit rounded-3xl p-4 shadow-xl shadow-gray-900">
+                                <div class="  shadow-md shadow-gray-600 absolute right-0 top-[-36px]   w-full bg-white p-3 rounded-full flex">
+                                    <input  class="w-[80%] pl-3 text-lg  font-semibold text-black focus:outline-none"  placeholder="alright">
+                                    <p
+                                    class="ml-auto float-right text-black text-[18px] group rounded-md inline-flex items-center text-base font-semibold hover:text-gray-900 ">
+                                    <img width="19.19" src="images/search.png" />
+                                    </p>
+                                   
+                                </div>
+                                <div class="">
+                                    <div class="bg-[#F8F8F8] rounded-sm p-3 mb-3">
+                                        <div class="flex justify-between font-semibold text-[16px]">
+                                            <p class="">Onboarding Home Assistant</p>
+                                            <p class="opacity-40">Getting Started</p>
+                                        </div>
+                                        <div class="bg-white rounded-sm p-1 mt-2">
+                                            <p class="text-[#41BDF5] text-[14px]">Alright<span class="text-black opacity-40">, you made it here. The tough part is done.</span></p>
+                                        </div>
+
+                                    </div>
+                                    <div class="bg-[#F8F8F8] rounded-sm p-3 mb-3">
+                                        <div class="flex justify-between font-semibold text-[16px]">
+                                            <p class="">Splitting up the configuration</p>
+                                            <p class="opacity-40">Docs / Configuration</p>
+                                        </div>
+                                        <div class="bg-white rounded-sm p-1 mt-2">
+                                            <p class="text-[#41BDF5] text-[14px]">Alright<span class="text-black opacity-40">, so we’ve got the single integrations and the include statements in the base ...</span></p>
+                                        </div>
+
+                                    </div>
+                                    <div class="bg-[#F8F8F8] rounded-sm p-3 mb-3">
+                                        <div class="flex justify-between font-semibold text-[16px]">
+                                            <p class="">Template Light</p>
+                                            <p class="opacity-40">Integration</p>
+                                        </div>
+                                        <div class="bg-white rounded-sm p-1 mt-2">
+                                            <p class="text-[#41BDF5] text-[14px]">Template Light<span class="text-black opacity-40"></span></p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                
+                        </div>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button type="button" onclick="menuopen()"
+                        class="relative rounded-md p-2 inline-flex items-center justify-center"
+                        aria-expanded="false">
+                        <span class="sr-only">Open menu</span>
+                        <svg width="18" height="12" viewBox="0 0 18 12" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0H18V2H0V0ZM0 5H18V7H0V5ZM0 10H18V12H0V10Z" fill="black" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+   
+
+    <div class="absolute top-0 inset-x-0 transition transform origin-top-right z-[100] hidden" id="mobile-menu">
+        <div class="shadow-lg ring-1 ring-black ring-opacity-5 bg-white"
+            style="background-image: url('images/menu_circle2.png');background-repeat:no-repeat;">
+            <div class="pt-[15px] pb-6 container mx-auto">
+                <div class="flex items-center justify-between">
+                    <div>
+                            <a href="home.html"><img class="h-8 w-auto" src="images/page_logo.png" class="w-[32px] h-[32px]" alt="Workflow"></a>
+                    </div>
+                    <div class="mr-1">
+                        <button type="button" onclick="menuclose()"
+                            class="rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                            <span class="sr-only">Close menu</span>
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z"
+                                    fill="black" />
+                            </svg>
+
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-10">
+                    <nav class="grid gap-y-8 px-3">
+                        <a href="discover.html"
+                            class="-m-3 py-3 flex items-center hover:bg-gray-50 border-opacity-20"
+                            style="border-bottom: dotted;border-bottom-color: #41bdf533;">
+                            <span class="ml-3 text-[32px] leading-[38px] font-semibold text-blue-light"> Discover
+                            </span>
+                        </a>
+                        <a href="learn.html" class="-m-3 py-3 flex items-center hover:bg-gray-50 border-opacity-20"
+                            style="border-bottom: dotted;border-bottom-color: #41bdf533;">
+                            <span class="ml-3 text-[32px] leading-[38px] font-semibold text-blue-light"> Learn
+                            </span>
+                        </a>
+                        <a href="build.html" class="-m-3 py-3 flex items-center hover:bg-gray-50 border-opacity-20"
+                            style="border-bottom: dotted;border-bottom-color: #41bdf533;">
+                            <span class="ml-3 text-[32px] leading-[38px] font-semibold text-blue-light"> Build
+                            </span>
+                        </a>
+                        <a href="#" class="-m-3 py-3 flex items-center hover:bg-gray-50 border-opacity-20"
+                            style="border-bottom: dotted;border-bottom-color: #41bdf533;">
+                            <span class="ml-3 text-[32px] leading-[38px] font-semibold text-blue-light"> Explore
+                            </span>
+                        </a>
+                        <a href="story.html" class="-m-3 py-3 flex items-center hover:bg-gray-50 border-opacity-20"
+                            style="border-bottom: dotted;border-bottom-color: #41bdf533;">
+                            <span class="ml-3 text-[32px] leading-[38px] font-semibold text-blue-light"> Our Story
+                            </span>
+                        </a>
+                        <a href="blog.html" class="-m-3 py-3 flex items-center rounded-md hover:bg-gray-50">
+                            <span class="ml-3 text-[32px] leading-[38px] font-semibold text-blue-light"> Blog
+                            </span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="mt-12 md:grid grid-cols-2 gap-16 xl:mt-0 xl:col-span-2  p-[25px]">
+                <div class="grid grid-cols-2 md:gap-8">
+                    <div>
+                        <h3 class="font-semibold text-[14px] text-black opacity-[.66] leading-3">SUPPORT</h3>
+                        <ul role="list" class="mt-4 space-y-4">
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Learn </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Developer Docs </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Contact </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-[14px] text-black opacity-[.66] leading-3">SYSTEM</h3>
+                        <ul role="list" class="mt-4 space-y-4">
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Alerts </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Status </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Sercurity </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Data </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2">
+                    <div>
+                        <h3 class="font-semibold text-[14px] text-black opacity-[.66] leading-3">COMMUNITY</h3>
+                        <ul role="list" class="mt-4 space-y-4">
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Explore </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Discord </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Github </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Data </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-11">
+                        <h3 class="font-semibold text-[14px] text-black opacity-[.66] leading-3">ABOUT</h3>
+                        <ul role="list" class="mt-4 space-y-4">
+                            <li>
+                                <a href="discover.html" class="font-semibold text-xl text-black"> Discover </a>
+                            </li>
+
+                            <li>
+                                <a href="story.html" class="font-semibold text-xl text-black"> Our Story </a>
+                            </li>
+
+                            <li>
+                                <a href="blog.html" class="font-semibold text-xl text-black"> Blog </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="container mx-auto px-6 lg:py-16 lg:px-8 mt-[90px]">
+                <div class="xl:grid xl:grid-cols-3 xl:gap-8">
+                    <div class="space-y-4 md:space-y-8 xl:col-span-1">
+                        <img class="hidden md:block" height="72" width="72" src="images/footer-logo.png"
+                            alt="Company name">
+                        <img class="md:hidden" height="38" width="38" src="images/mobile-footer-logo.png"
+                            alt="Company name">
+                        <p class="font-semibold text-xl md:text-[30px] leading-7 text-black">Home Assistant</p>
+                        <div class="flex md:hidden space-x-6">
+                            <a href="#" class="text-gray-400 hover:text-gray-500">
+                                <span class="sr-only">Instagram</span>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M10 1.80187C12.6701 1.80187 12.9863 1.81203 14.0408 1.86008C15.0158 1.90461 15.5453 2.0675 15.8977 2.20445C16.3645 2.38586 16.6976 2.60258 17.0475 2.9525C17.3975 3.30242 17.6141 3.63555 17.7955 4.10227C17.9325 4.45469 18.0954 4.98422 18.1399 5.95914C18.188 7.01367 18.1981 7.32992 18.1981 10C18.1981 12.6702 18.188 12.9864 18.1399 14.0409C18.0954 15.0159 17.9325 15.5453 17.7955 15.8977C17.6141 16.3645 17.3974 16.6977 17.0475 17.0476C16.6976 17.3975 16.3645 17.6142 15.8977 17.7955C15.5453 17.9325 15.0158 18.0955 14.0408 18.1399C12.9865 18.188 12.6702 18.1982 10 18.1982C7.32969 18.1982 7.01344 18.188 5.95914 18.1399C4.98414 18.0954 4.45469 17.9325 4.10227 17.7955C3.63555 17.6142 3.30234 17.3975 2.95242 17.0476C2.6025 16.6976 2.38578 16.3645 2.20445 15.8977C2.0675 15.5454 1.90453 15.0159 1.86008 14.0409C1.81195 12.9864 1.8018 12.6702 1.8018 10C1.8018 7.32992 1.81195 7.01367 1.86008 5.95922C1.90461 4.98422 2.0675 4.45469 2.20445 4.10227C2.38578 3.63555 2.6025 3.30242 2.95242 2.9525C3.30242 2.6025 3.63555 2.38586 4.10227 2.20445C4.45461 2.0675 4.98414 1.90461 5.95914 1.86008C7.01359 1.81203 7.32984 1.80187 10 1.80187ZM10 0C7.28414 0 6.94359 0.0114844 5.87703 0.0601562C4.81258 0.10875 4.08562 0.277812 3.44961 0.525C2.79195 0.780547 2.2343 1.1225 1.67836 1.67844C1.12242 2.23438 0.780547 2.79203 0.525 3.44961C0.277734 4.0857 0.10875 4.81266 0.0601562 5.87703C0.0114844 6.94359 0 7.28414 0 10C0 12.7159 0.0114844 13.0564 0.0601562 14.123C0.10875 15.1874 0.277734 15.9144 0.525 16.5504C0.780469 17.208 1.12242 17.7657 1.67836 18.3216C2.2343 18.8776 2.79195 19.2195 3.44961 19.475C4.0857 19.7223 4.81258 19.8913 5.87695 19.9398C6.94359 19.9885 7.28414 20 10 20C12.7159 20 13.0564 19.9885 14.123 19.9398C15.1873 19.8913 15.9143 19.7223 16.5503 19.475C17.208 19.2195 17.7656 18.8776 18.3216 18.3216C18.8775 17.7657 19.2195 17.208 19.475 16.5504C19.7222 15.9143 19.8913 15.1874 19.9398 14.123C19.9885 13.0564 20 12.7159 20 10C20 7.28414 19.9885 6.94359 19.9398 5.87703C19.8913 4.81266 19.7222 4.0857 19.475 3.44969C19.2195 2.79203 18.8775 2.23438 18.3216 1.67844C17.7656 1.1225 17.208 0.780469 16.5504 0.525C15.9143 0.277812 15.1873 0.10875 14.123 0.0601562C13.0564 0.0114844 12.7159 0 10 0ZM10 4.86484C7.16391 4.86484 4.86484 7.16406 4.86484 10C4.86484 12.8361 7.16391 15.1352 10 15.1352C12.836 15.1352 15.1352 12.8361 15.1352 10C15.1352 7.16398 12.836 4.86484 10 4.86484ZM10 13.3334C8.15906 13.3334 6.66664 11.8409 6.66664 10C6.66664 8.15906 8.15906 6.66664 10 6.66664C11.8409 6.66664 13.3334 8.15906 13.3334 10C13.3334 11.8409 11.8409 13.3334 10 13.3334ZM16.538 4.66195C16.538 5.32477 16.0008 5.86195 15.338 5.86195C14.6752 5.86195 14.138 5.32477 14.138 4.66195C14.138 3.99922 14.6752 3.46195 15.338 3.46195C16.0008 3.46195 16.538 3.99922 16.538 4.66195Z"
+                                        fill="#0A0A08" />
+                                </svg>
+                            </a>
+
+                            <a href="#" class="text-gray-400 hover:text-gray-500">
+                                <span class="sr-only">GitHub</span>
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M5.5625 16.1875C3.6875 16.8125 1.8125 15.5625 1.1875 14.9375M6.1875 16.8125C6.1875 16.8125 5.5625 14.3125 6.8125 13.0625C6.8125 13.0625 4.3125 13.0625 2.4375 11.1875C0.5625 9.3125 1.1875 5.5625 2.4375 4.3125C1.8125 2.4375 3.0625 1.1875 3.0625 1.1875C3.0625 1.1875 4.9375 1.1875 6.1875 2.4375C7.4375 1.8125 10.5625 1.8125 11.8125 2.4375C13.0625 1.1875 14.9375 1.1875 14.9375 1.1875C14.9375 1.1875 16.1875 2.4375 15.5625 4.3125C16.8125 5.5625 17.4375 9.3125 15.5625 11.1875C13.6875 13.0625 11.1875 13.0625 11.1875 13.0625C12.4375 14.3125 11.8125 16.8125 11.8125 16.8125H6.1875Z"
+                                        stroke="black" stroke-width="1.875" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </a>
+
+                            <a href="#" class="text-gray-400 hover:text-gray-500">
+                                <span class="sr-only">Twitter</span>
+                                <svg width="20" height="17" viewBox="0 0 20 17" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M17.8906 4.34359C17.7969 4.67172 17.4001 5.50532 16.7219 6.29653C16.2698 14.9715 7.84908 17.7972 2.08457 14.8867C1.29336 13.8412 4.93857 14.2651 6.26667 12.2588C1.23685 9.68744 1.63245 2.82087 2.64972 3.10344C5.02334 6.29653 8.83811 6.5791 9.45971 6.29653C9.45971 5.56184 9.14891 3.97942 10.8726 2.65132C11.8616 1.94489 13.9297 1.31234 15.8047 3.34359C16.125 3.55453 16.5859 3.64828 17.2734 3.49203C17.6797 3.28109 18.2262 3.42684 17.9453 4.15609"
+                                        stroke="black" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </a>
+
+                            <a href="#" class="text-gray-400 hover:text-gray-500">
+                                <span class="sr-only">Facebook</span>
+                                <svg width="12" height="18" viewBox="0 0 12 18" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M11 4.25016H8.49458C8.04208 4.25016 7.675 4.61683 7.675 5.06975V7.94475H11L10.5129 11.1102H7.67542V16.9168H4.01875V11.1102H1V7.94475H3.97958L4.01875 4.94058L4.01333 4.39475C4.00898 3.9615 4.09055 3.53169 4.25333 3.13017C4.41611 2.72864 4.65686 2.36337 4.96167 2.05545C5.26648 1.74754 5.62931 1.50311 6.02916 1.33628C6.42902 1.16944 6.85798 1.08353 7.29125 1.0835H11V4.25016Z"
+                                        stroke="black" stroke-width="1.58333" stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="mt-[35px] md:mt-[47px] border-t border-grey-secondary py-[21px] md:py-[26px] px-[40px] md:px-0">
+                <span class="text-xs text-black opacity-[.66] inline-block text-center md:text-left"><span
+                        class="underline underline-offset-1">Copyright © 2022 Home Assistant, Inc. Read
+                        Privacy</span> and <span class="underline underline-offset-1">Terms &
+                        Conditions</span></span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- searchBox -->
+<div class="hidden h-full w-full fixed z-30  bg-[#0101014f] top-0"  id="mobile-search-box">
+    <div class="w-[90%] mx-auto left-[-50%] translate-[-50%] mt-5">
+        <div class="flex justify-between">
+            <div class="  shadow-md shadow-gray-600 w-full mr-3 bg-white p-3 rounded-full flex">
+                <input  class="w-[80%] pl-3 text-lg  font-semibold text-black focus:outline-none"  placeholder="alright">
+                <p
+                class="ml-auto float-right text-black text-[18px] group rounded-md inline-flex items-center text-base font-semibold hover:text-gray-900 ">
+                <img width="19.19" src="images/search.png" />
+                </p>
+               
+            </div>
+            <div class="flex items-center px-5  shadow-md shadow-gray-600 bg-white p-3 rounded-full search-close cursor-pointer">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="black"/>
+                    </svg>                        
+            </div>
+
+        </div>
+        <div class=" bg-white h-fit rounded-3xl p-4 shadow-xl shadow-gray-900 mt-5">
+            <div class="">
+                <div class="bg-[#F8F8F8] rounded-sm p-3 mb-3">
+                    <div class="flex justify-between font-semibold text-[16px]">
+                        <p class="">Onboarding Home Assistant</p>
+                        <p class="opacity-40">Getting Started</p>
+                    </div>
+                    <div class="bg-white rounded-sm p-1 mt-2">
+                        <p class="text-[#41BDF5] text-[14px]">Alright<span class="text-black opacity-40">, you made it here. The tough part is done.</span></p>
+                    </div>
+
+                </div>
+                <div class="bg-[#F8F8F8] rounded-sm p-3 mb-3">
+                    <div class="flex justify-between font-semibold text-[16px]">
+                        <p class="">Splitting up the configuration</p>
+                        <p class="opacity-40">Docs / Configuration</p>
+                    </div>
+                    <div class="bg-white rounded-sm p-1 mt-2">
+                        <p class="text-[#41BDF5] text-[14px]">Alright<span class="text-black opacity-40">, so we’ve got the single integrations and the include statements in the base ...</span></p>
+                    </div>
+
+                </div>
+                <div class="bg-[#F8F8F8] rounded-sm p-3 mb-3">
+                    <div class="flex justify-between font-semibold text-[16px]">
+                        <p class="">Template Light</p>
+                        <p class="opacity-40">Integration</p>
+                    </div>
+                    <div class="bg-white rounded-sm p-1 mt-2">
+                        <p class="text-[#41BDF5] text-[14px]">Template Light<span class="text-black opacity-40"></span></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+    <!-- main content -->
+    
+    <div class="container mx-auto">
+        <p class="text-center font-extrabold text-[68px] leading-[81.6px]">Privacy Policy</p>
+        <div class="bg-[#F5F5F5] w-[90%] mx-auto my-[100px] rounded-[30px] p-[50px]" >
+            <p class="font-medium text-[20px] text-black text-opacity-50 leading-[27.24px]"> 
+                <b class="text-[32px] text-black leading-[43.58px]">Principles</b>
+                <br><br>
+                Your privacy is critically important to us. At Home Assistant, we have a few fundamental principles: 
+                <br><br>
+                We don’t ask you for personal information unless we truly need it. (We can’t stand services that ask you for things like your gender or income level for no apparent reason.)
+                <br>
+                We don’t share your personal information with anyone except to comply with the law, develop our products, or protect our rights. <br>
+                We don’t store personal information on our servers unless required for the ongoing operation of one of our services. <br>
+                If you have questions about deleting or correcting your personal data please contact our support team. <br><br>
+                
+                <b class="text-[32px] text-black leading-[43.58px]">Website Visitors</b>
+                <br><br>
+                Like most website operators, Home Assistant collects non-personally-identifying information of the sort that web browsers and servers typically make available, such as the browser type, language preference, referring site, and the date and time of each visitor request. Home Assistant uses the Google Analytics service for this. Home Assistant’s purpose in collecting non-personally identifying information is to better understand how Home Assistant’s visitors use its website. From time to time, Home Assistant may release non-personally-identifying information in the aggregate, e.g., by publishing a report on trends in the usage of its website. <br><br>
+                
+                Home Assistant also collects potentially personally-identifying information like Internet Protocol (IP) addresses for logged in users and for users leaving comments on the blog or forums. Home Assistant only discloses logged in user and commenter IP addresses under the same circumstances that it uses and discloses personally-identifying information as described below. <br><br>
+                
+                <b class="text-[32px] text-black leading-[43.58px]">Gathering of Personally-Identifying Information</b>
+                <br><br>
+                Certain visitors to Home Assistant’s websites choose to interact with Home Assistant in ways that require Home Assistant to gather personally-identifying information. The amount and type of information that Home Assistant gathers depends on the nature of the interaction. For example, we ask visitors who create a forum account to provide a username and an email address. Those who engage in transactions with Home Assistant are asked to provide additional information, including as necessary the personal and financial information required to process those transactions. In each case, Home Assistant collects such information only insofar as is necessary or appropriate to fulfill the purpose of the visitor’s interaction with Home Assistant. Home Assistant does not disclose personally-identifying information other than as described below. And visitors can always refuse to supply personally-identifying information, with the caveat that it may prevent them from engaging in certain website-related activities.
+            </p>
+        </div>
+    </div>
+
+
+    <!-- footer -->
+    <footer class="bg-white" aria-labelledby="footer-heading">
+        <h2 id="footer-heading" class="sr-only">Footer</h2>
+        <div class="container mx-auto py-12 lg:py-16">
+            <div class="xl:grid xl:grid-cols-3 xl:gap-8">
+                <div class="space-y-4 md:space-y-8 xl:col-span-1">
+                    <img class="hidden md:block" height="72" width="72" src="images/footer-logo.png" alt="Company name">
+                    <img class="md:hidden" height="38" width="38" src="images/mobile-footer-logo.png" alt="Company name">
+                    <p class="font-semibold text-xl md:text-[30px] leading-7 text-black">Home Assistant</p>
+                    <div class="flex md:hidden space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-gray-500">
+                            <span class="sr-only">Instagram</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 1.80187C12.6701 1.80187 12.9863 1.81203 14.0408 1.86008C15.0158 1.90461 15.5453 2.0675 15.8977 2.20445C16.3645 2.38586 16.6976 2.60258 17.0475 2.9525C17.3975 3.30242 17.6141 3.63555 17.7955 4.10227C17.9325 4.45469 18.0954 4.98422 18.1399 5.95914C18.188 7.01367 18.1981 7.32992 18.1981 10C18.1981 12.6702 18.188 12.9864 18.1399 14.0409C18.0954 15.0159 17.9325 15.5453 17.7955 15.8977C17.6141 16.3645 17.3974 16.6977 17.0475 17.0476C16.6976 17.3975 16.3645 17.6142 15.8977 17.7955C15.5453 17.9325 15.0158 18.0955 14.0408 18.1399C12.9865 18.188 12.6702 18.1982 10 18.1982C7.32969 18.1982 7.01344 18.188 5.95914 18.1399C4.98414 18.0954 4.45469 17.9325 4.10227 17.7955C3.63555 17.6142 3.30234 17.3975 2.95242 17.0476C2.6025 16.6976 2.38578 16.3645 2.20445 15.8977C2.0675 15.5454 1.90453 15.0159 1.86008 14.0409C1.81195 12.9864 1.8018 12.6702 1.8018 10C1.8018 7.32992 1.81195 7.01367 1.86008 5.95922C1.90461 4.98422 2.0675 4.45469 2.20445 4.10227C2.38578 3.63555 2.6025 3.30242 2.95242 2.9525C3.30242 2.6025 3.63555 2.38586 4.10227 2.20445C4.45461 2.0675 4.98414 1.90461 5.95914 1.86008C7.01359 1.81203 7.32984 1.80187 10 1.80187ZM10 0C7.28414 0 6.94359 0.0114844 5.87703 0.0601562C4.81258 0.10875 4.08562 0.277812 3.44961 0.525C2.79195 0.780547 2.2343 1.1225 1.67836 1.67844C1.12242 2.23438 0.780547 2.79203 0.525 3.44961C0.277734 4.0857 0.10875 4.81266 0.0601562 5.87703C0.0114844 6.94359 0 7.28414 0 10C0 12.7159 0.0114844 13.0564 0.0601562 14.123C0.10875 15.1874 0.277734 15.9144 0.525 16.5504C0.780469 17.208 1.12242 17.7657 1.67836 18.3216C2.2343 18.8776 2.79195 19.2195 3.44961 19.475C4.0857 19.7223 4.81258 19.8913 5.87695 19.9398C6.94359 19.9885 7.28414 20 10 20C12.7159 20 13.0564 19.9885 14.123 19.9398C15.1873 19.8913 15.9143 19.7223 16.5503 19.475C17.208 19.2195 17.7656 18.8776 18.3216 18.3216C18.8775 17.7657 19.2195 17.208 19.475 16.5504C19.7222 15.9143 19.8913 15.1874 19.9398 14.123C19.9885 13.0564 20 12.7159 20 10C20 7.28414 19.9885 6.94359 19.9398 5.87703C19.8913 4.81266 19.7222 4.0857 19.475 3.44969C19.2195 2.79203 18.8775 2.23438 18.3216 1.67844C17.7656 1.1225 17.208 0.780469 16.5504 0.525C15.9143 0.277812 15.1873 0.10875 14.123 0.0601562C13.0564 0.0114844 12.7159 0 10 0ZM10 4.86484C7.16391 4.86484 4.86484 7.16406 4.86484 10C4.86484 12.8361 7.16391 15.1352 10 15.1352C12.836 15.1352 15.1352 12.8361 15.1352 10C15.1352 7.16398 12.836 4.86484 10 4.86484ZM10 13.3334C8.15906 13.3334 6.66664 11.8409 6.66664 10C6.66664 8.15906 8.15906 6.66664 10 6.66664C11.8409 6.66664 13.3334 8.15906 13.3334 10C13.3334 11.8409 11.8409 13.3334 10 13.3334ZM16.538 4.66195C16.538 5.32477 16.0008 5.86195 15.338 5.86195C14.6752 5.86195 14.138 5.32477 14.138 4.66195C14.138 3.99922 14.6752 3.46195 15.338 3.46195C16.0008 3.46195 16.538 3.99922 16.538 4.66195Z" fill="#0A0A08"/>
+                            </svg>
+                        </a>
+              
+                        <a href="#" class="text-gray-400 hover:text-gray-500">
+                            <span class="sr-only">GitHub</span>
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.5625 16.1875C3.6875 16.8125 1.8125 15.5625 1.1875 14.9375M6.1875 16.8125C6.1875 16.8125 5.5625 14.3125 6.8125 13.0625C6.8125 13.0625 4.3125 13.0625 2.4375 11.1875C0.5625 9.3125 1.1875 5.5625 2.4375 4.3125C1.8125 2.4375 3.0625 1.1875 3.0625 1.1875C3.0625 1.1875 4.9375 1.1875 6.1875 2.4375C7.4375 1.8125 10.5625 1.8125 11.8125 2.4375C13.0625 1.1875 14.9375 1.1875 14.9375 1.1875C14.9375 1.1875 16.1875 2.4375 15.5625 4.3125C16.8125 5.5625 17.4375 9.3125 15.5625 11.1875C13.6875 13.0625 11.1875 13.0625 11.1875 13.0625C12.4375 14.3125 11.8125 16.8125 11.8125 16.8125H6.1875Z" stroke="black" stroke-width="1.875" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+              
+                        <a href="#" class="text-gray-400 hover:text-gray-500">
+                            <span class="sr-only">Twitter</span>
+                            <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17.8906 4.34359C17.7969 4.67172 17.4001 5.50532 16.7219 6.29653C16.2698 14.9715 7.84908 17.7972 2.08457 14.8867C1.29336 13.8412 4.93857 14.2651 6.26667 12.2588C1.23685 9.68744 1.63245 2.82087 2.64972 3.10344C5.02334 6.29653 8.83811 6.5791 9.45971 6.29653C9.45971 5.56184 9.14891 3.97942 10.8726 2.65132C11.8616 1.94489 13.9297 1.31234 15.8047 3.34359C16.125 3.55453 16.5859 3.64828 17.2734 3.49203C17.6797 3.28109 18.2262 3.42684 17.9453 4.15609" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+        
+                        <a href="#" class="text-gray-400 hover:text-gray-500">
+                            <span class="sr-only">Facebook</span>
+                            <svg width="12" height="18" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11 4.25016H8.49458C8.04208 4.25016 7.675 4.61683 7.675 5.06975V7.94475H11L10.5129 11.1102H7.67542V16.9168H4.01875V11.1102H1V7.94475H3.97958L4.01875 4.94058L4.01333 4.39475C4.00898 3.9615 4.09055 3.53169 4.25333 3.13017C4.41611 2.72864 4.65686 2.36337 4.96167 2.05545C5.26648 1.74754 5.62931 1.50311 6.02916 1.33628C6.42902 1.16944 6.85798 1.08353 7.29125 1.0835H11V4.25016Z" stroke="black" stroke-width="1.58333" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="mt-12 md:grid grid-cols-2 gap-16 xl:mt-0 xl:col-span-2 hidden">
+                    <div class="md:grid md:grid-cols-2 md:gap-8">
+                    <div>
+                        <h3 class="font-semibold text-[14px] text-black opacity-[.66] leading-3">ABOUT</h3>
+                        <ul role="list" class="mt-4 space-y-4">
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Discover </a>
+                            </li>
+    
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Our Story </a>
+                            </li>
+    
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Blog </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-12 md:mt-0">
+                        <h3 class="font-semibold text-[14px] text-black opacity-[.66] leading-3">SYSTEM</h3>
+                        <ul role="list" class="mt-4 space-y-4">
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Alerts </a>
+                            </li>
+    
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Status </a>
+                            </li>
+    
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Sercurity </a>
+                            </li>
+    
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Data </a>
+                            </li>
+                        </ul>
+                    </div>
+                    </div>
+                    <div class="md:grid md:grid-cols-2 md:gap-8">
+                    <div>
+                        <h3 class="font-semibold text-[14px] text-black opacity-[.66] leading-3">COMMUNITY</h3>
+                        <ul role="list" class="mt-4 space-y-4">
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Explore </a>
+                            </li>
+    
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Discord </a>
+                            </li>
+    
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Github </a>
+                            </li>
+    
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Data </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-12 md:mt-0">
+                        <h3 class="font-semibold text-[14px] text-black opacity-[.66] leading-3">SUPPORT</h3>
+                        <ul role="list" class="mt-4 space-y-4">
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Learn </a>
+                            </li>
+    
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Developer Docs </a>
+                            </li>
+    
+                            <li>
+                                <a href="#" class="font-semibold text-xl text-black"> Contact </a>
+                            </li>
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-[35px] md:mt-[47px] border-t border-grey-secondary py-[21px] md:py-[26px] px-[40px] md:px-0">
+                <span class="text-xs text-black opacity-[.66] inline-block text-center md:text-left"><span class="underline underline-offset-1">Copyright © 2022 Home Assistant, Inc. Read Privacy</span> and <span class="underline underline-offset-1">Terms & Conditions</span></span>
+                <div class="hidden md:flex space-x-6 float-right">
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        <span class="sr-only">Instagram</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 1.80187C12.6701 1.80187 12.9863 1.81203 14.0408 1.86008C15.0158 1.90461 15.5453 2.0675 15.8977 2.20445C16.3645 2.38586 16.6976 2.60258 17.0475 2.9525C17.3975 3.30242 17.6141 3.63555 17.7955 4.10227C17.9325 4.45469 18.0954 4.98422 18.1399 5.95914C18.188 7.01367 18.1981 7.32992 18.1981 10C18.1981 12.6702 18.188 12.9864 18.1399 14.0409C18.0954 15.0159 17.9325 15.5453 17.7955 15.8977C17.6141 16.3645 17.3974 16.6977 17.0475 17.0476C16.6976 17.3975 16.3645 17.6142 15.8977 17.7955C15.5453 17.9325 15.0158 18.0955 14.0408 18.1399C12.9865 18.188 12.6702 18.1982 10 18.1982C7.32969 18.1982 7.01344 18.188 5.95914 18.1399C4.98414 18.0954 4.45469 17.9325 4.10227 17.7955C3.63555 17.6142 3.30234 17.3975 2.95242 17.0476C2.6025 16.6976 2.38578 16.3645 2.20445 15.8977C2.0675 15.5454 1.90453 15.0159 1.86008 14.0409C1.81195 12.9864 1.8018 12.6702 1.8018 10C1.8018 7.32992 1.81195 7.01367 1.86008 5.95922C1.90461 4.98422 2.0675 4.45469 2.20445 4.10227C2.38578 3.63555 2.6025 3.30242 2.95242 2.9525C3.30242 2.6025 3.63555 2.38586 4.10227 2.20445C4.45461 2.0675 4.98414 1.90461 5.95914 1.86008C7.01359 1.81203 7.32984 1.80187 10 1.80187ZM10 0C7.28414 0 6.94359 0.0114844 5.87703 0.0601562C4.81258 0.10875 4.08562 0.277812 3.44961 0.525C2.79195 0.780547 2.2343 1.1225 1.67836 1.67844C1.12242 2.23438 0.780547 2.79203 0.525 3.44961C0.277734 4.0857 0.10875 4.81266 0.0601562 5.87703C0.0114844 6.94359 0 7.28414 0 10C0 12.7159 0.0114844 13.0564 0.0601562 14.123C0.10875 15.1874 0.277734 15.9144 0.525 16.5504C0.780469 17.208 1.12242 17.7657 1.67836 18.3216C2.2343 18.8776 2.79195 19.2195 3.44961 19.475C4.0857 19.7223 4.81258 19.8913 5.87695 19.9398C6.94359 19.9885 7.28414 20 10 20C12.7159 20 13.0564 19.9885 14.123 19.9398C15.1873 19.8913 15.9143 19.7223 16.5503 19.475C17.208 19.2195 17.7656 18.8776 18.3216 18.3216C18.8775 17.7657 19.2195 17.208 19.475 16.5504C19.7222 15.9143 19.8913 15.1874 19.9398 14.123C19.9885 13.0564 20 12.7159 20 10C20 7.28414 19.9885 6.94359 19.9398 5.87703C19.8913 4.81266 19.7222 4.0857 19.475 3.44969C19.2195 2.79203 18.8775 2.23438 18.3216 1.67844C17.7656 1.1225 17.208 0.780469 16.5504 0.525C15.9143 0.277812 15.1873 0.10875 14.123 0.0601562C13.0564 0.0114844 12.7159 0 10 0ZM10 4.86484C7.16391 4.86484 4.86484 7.16406 4.86484 10C4.86484 12.8361 7.16391 15.1352 10 15.1352C12.836 15.1352 15.1352 12.8361 15.1352 10C15.1352 7.16398 12.836 4.86484 10 4.86484ZM10 13.3334C8.15906 13.3334 6.66664 11.8409 6.66664 10C6.66664 8.15906 8.15906 6.66664 10 6.66664C11.8409 6.66664 13.3334 8.15906 13.3334 10C13.3334 11.8409 11.8409 13.3334 10 13.3334ZM16.538 4.66195C16.538 5.32477 16.0008 5.86195 15.338 5.86195C14.6752 5.86195 14.138 5.32477 14.138 4.66195C14.138 3.99922 14.6752 3.46195 15.338 3.46195C16.0008 3.46195 16.538 3.99922 16.538 4.66195Z" fill="#0A0A08"/>
+                        </svg>
+                    </a>
+          
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        <span class="sr-only">GitHub</span>
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.5625 16.1875C3.6875 16.8125 1.8125 15.5625 1.1875 14.9375M6.1875 16.8125C6.1875 16.8125 5.5625 14.3125 6.8125 13.0625C6.8125 13.0625 4.3125 13.0625 2.4375 11.1875C0.5625 9.3125 1.1875 5.5625 2.4375 4.3125C1.8125 2.4375 3.0625 1.1875 3.0625 1.1875C3.0625 1.1875 4.9375 1.1875 6.1875 2.4375C7.4375 1.8125 10.5625 1.8125 11.8125 2.4375C13.0625 1.1875 14.9375 1.1875 14.9375 1.1875C14.9375 1.1875 16.1875 2.4375 15.5625 4.3125C16.8125 5.5625 17.4375 9.3125 15.5625 11.1875C13.6875 13.0625 11.1875 13.0625 11.1875 13.0625C12.4375 14.3125 11.8125 16.8125 11.8125 16.8125H6.1875Z" stroke="black" stroke-width="1.875" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+          
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        <span class="sr-only">Twitter</span>
+                        <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.8906 4.34359C17.7969 4.67172 17.4001 5.50532 16.7219 6.29653C16.2698 14.9715 7.84908 17.7972 2.08457 14.8867C1.29336 13.8412 4.93857 14.2651 6.26667 12.2588C1.23685 9.68744 1.63245 2.82087 2.64972 3.10344C5.02334 6.29653 8.83811 6.5791 9.45971 6.29653C9.45971 5.56184 9.14891 3.97942 10.8726 2.65132C11.8616 1.94489 13.9297 1.31234 15.8047 3.34359C16.125 3.55453 16.5859 3.64828 17.2734 3.49203C17.6797 3.28109 18.2262 3.42684 17.9453 4.15609" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+    
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        <span class="sr-only">Facebook</span>
+                        <svg width="12" height="18" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 4.25016H8.49458C8.04208 4.25016 7.675 4.61683 7.675 5.06975V7.94475H11L10.5129 11.1102H7.67542V16.9168H4.01875V11.1102H1V7.94475H3.97958L4.01875 4.94058L4.01333 4.39475C4.00898 3.9615 4.09055 3.53169 4.25333 3.13017C4.41611 2.72864 4.65686 2.36337 4.96167 2.05545C5.26648 1.74754 5.62931 1.50311 6.02916 1.33628C6.42902 1.16944 6.85798 1.08353 7.29125 1.0835H11V4.25016Z" stroke="black" stroke-width="1.58333" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/sly.min.js"></script>
+<script src="js/stopExecutionOnTimeout.js"></script>
+<script src="js/home.js"></script>
+</html>
